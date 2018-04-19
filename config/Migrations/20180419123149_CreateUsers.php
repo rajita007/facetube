@@ -28,17 +28,17 @@ class CreateUsers extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
+        $table->addColumn('photo', 'text', [
+            'default' => null,
+            'null' => false,
+        ]);
         $table->addColumn('status', 'boolean', [
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('role', 'integer', [
+        $table->addColumn('role_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => false,
-        ]);
-        $table->addColumn('photo', 'text', [
-            'default' => null,
             'null' => false,
         ]);
         $table->addColumn('created', 'datetime', [

@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property |\Cake\ORM\Association\BelongsTo $Roles
  * @property \App\Model\Table\LikesTable|\Cake\ORM\Association\HasMany $Likes
  * @property \App\Model\Table\NotificationsTable|\Cake\ORM\Association\HasMany $Notifications
  *
@@ -41,6 +42,10 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Likes', [
             'foreignKey' => 'user_id'
         ]);
@@ -79,19 +84,14 @@ class UsersTable extends Table
             ->notEmpty('password');
 
         $validator
-            ->boolean('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
-
-        $validator
-            ->integer('role')
-            ->requirePresence('role', 'create')
-            ->notEmpty('role');
-
-        $validator
             ->scalar('photo')
             ->requirePresence('photo', 'create')
             ->notEmpty('photo');
+
+        $validator
+            ->boolean('status')
+            ->requirePresence('status', 'create')
+            ->notEmpty('status');
 
         return $validator;
     }
@@ -106,6 +106,7 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['role_id'], 'Roles'));
 
         return $rules;
     }
