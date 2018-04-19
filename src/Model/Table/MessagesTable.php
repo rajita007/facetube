@@ -42,10 +42,12 @@ class MessagesTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Senders', [
+            'className'=>'Users',
             'foreignKey' => 'sender_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Receivers', [
+            'className'=>'Users',
             'foreignKey' => 'receiver_id',
             'joinType' => 'INNER'
         ]);
