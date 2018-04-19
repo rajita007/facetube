@@ -4,10 +4,10 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * NotificationsFixture
+ * RolesFixture
  *
  */
-class NotificationsFixture extends TestFixture
+class RolesFixture extends TestFixture
 {
 
     /**
@@ -18,9 +18,7 @@ class NotificationsFixture extends TestFixture
     // @codingStandardsIgnoreStart
     public $fields = [
         'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
-        'user_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'notificationType_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'object_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'created' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'datetime', 'length' => null, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
@@ -43,16 +41,9 @@ class NotificationsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'user_id' => 1,
-                'notificationType_id' => 1,
-                'object_id' => 1,
-<<<<<<< HEAD
-                'created' => '2018-04-19 12:03:36',
-                'modified' => '2018-04-19 12:03:36'
-=======
-                'created' => '2018-04-19 11:57:21',
-                'modified' => '2018-04-19 11:57:21'
->>>>>>> 578441fb3a7c8fb0a3bcbeb56a30a5c2347c80e5
+                'name' => 'Lorem ipsum dolor sit amet',
+                'created' => '2018-04-19 12:24:51',
+                'modified' => '2018-04-19 12:24:51'
             ],
         ];
         parent::init();
