@@ -2,7 +2,7 @@
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
-
+use Cake\Auth\DefaultPasswordHasher;
 /**
  * User Entity
  *
@@ -16,6 +16,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
+ * @property \App\Model\Entity\Role $role
  * @property \App\Model\Entity\Like[] $likes
  * @property \App\Model\Entity\Notification[] $notifications
  */
@@ -40,6 +41,7 @@ class User extends Entity
         'role_id' => true,
         'created' => true,
         'modified' => true,
+        'role' => true,
         'likes' => true,
         'notifications' => true
     ];

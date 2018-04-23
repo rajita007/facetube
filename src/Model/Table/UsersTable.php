@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property |\Cake\ORM\Association\BelongsTo $Roles
+ * @property \App\Model\Table\RolesTable|\Cake\ORM\Association\BelongsTo $Roles
  * @property \App\Model\Table\LikesTable|\Cake\ORM\Association\HasMany $Likes
  * @property \App\Model\Table\NotificationsTable|\Cake\ORM\Association\HasMany $Notifications
  *
