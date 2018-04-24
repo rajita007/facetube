@@ -89,9 +89,9 @@ class UsersTable extends Table
             ->notEmpty('photo');
 
         $validator
-            ->boolean('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->boolean('status');
+            //->requirePresence('status', 'create')
+            //->notEmpty('status');
 
         return $validator;
     }
