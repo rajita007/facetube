@@ -46,13 +46,8 @@ class FriendsFixture extends TestFixture
                 'sender_id' => 1,
                 'receiver_id' => 1,
                 'status' => 1,
-<<<<<<< HEAD
-                'created' => '2018-04-19 12:03:36',
-                'modified' => '2018-04-19 12:03:36'
-=======
-                'created' => '2018-04-19 11:57:21',
-                'modified' => '2018-04-19 11:57:21'
->>>>>>> 578441fb3a7c8fb0a3bcbeb56a30a5c2347c80e5
+                'created' => '2018-04-25 06:47:04',
+                'modified' => '2018-04-25 06:47:04'
             ],
         ];
         parent::init();
