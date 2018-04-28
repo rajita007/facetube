@@ -46,6 +46,10 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        
+
+    // die;
+
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -53,5 +57,6 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+
     }
 }

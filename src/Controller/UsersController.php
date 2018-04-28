@@ -109,4 +109,19 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+    public function searchData()
+    {
+
+
+    }
+    public function ajaxSearch(){
+      $post=$this->request->getData();
+
+      $user = $this->Users->find()->where(['name'=>$post['description']])->all();
+      pr($user);die;
+          $this->set('user', $user);
+
+
+      }
+
 }

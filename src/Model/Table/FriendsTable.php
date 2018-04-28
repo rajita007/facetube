@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Friends Model
  *
- * @property \App\Model\Table\SendersTable|\Cake\ORM\Association\BelongsTo $Senders
- * @property \App\Model\Table\ReceiversTable|\Cake\ORM\Association\BelongsTo $Receivers
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Senders
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Receivers
  *
  * @method \App\Model\Entity\Friend get($primaryKey, $options = [])
  * @method \App\Model\Entity\Friend newEntity($data = null, array $options = [])
@@ -42,12 +42,12 @@ class FriendsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Senders', [
-            'className'=>'Users',
+            'className' => 'Users',
             'foreignKey' => 'sender_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Receivers', [
-            'className'=>'Users',
+            'className' => 'Users',
             'foreignKey' => 'receiver_id',
             'joinType' => 'INNER'
         ]);

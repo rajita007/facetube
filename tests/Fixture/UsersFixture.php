@@ -52,8 +52,8 @@ class UsersFixture extends TestFixture
                 'photo' => 'Lorem ipsum dolor sit amet, aliquet feugiat. Convallis morbi fringilla gravida, phasellus feugiat dapibus velit nunc, pulvinar eget sollicitudin venenatis cum nullam, vivamus ut a sed, mollitia lectus. Nulla vestibulum massa neque ut et, id hendrerit sit, feugiat in taciti enim proin nibh, tempor dignissim, rhoncus duis vestibulum nunc mattis convallis.',
                 'status' => 1,
                 'role_id' => 1,
-                'created' => '2018-04-19 12:40:18',
-                'modified' => '2018-04-19 12:40:18'
+                'created' => '2018-04-25 07:34:29',
+                'modified' => '2018-04-25 07:34:29'
             ],
         ];
         parent::init();

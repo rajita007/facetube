@@ -19,8 +19,8 @@ class UserSeed extends AbstractSeed
     public function run()
     {
         $data = [
-        'name'=>'root',
-            'email'=>'root@admin.com',
+        'name'=>'Abhishek',
+            'email'=>'Abhishek@admin.com',
             'password'=> (new DefaultPasswordHasher)->hash('admin'),
             'status'=> 1,
             'photo'=> 'NoPhoto',
