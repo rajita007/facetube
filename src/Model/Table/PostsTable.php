@@ -79,6 +79,11 @@ class PostsTable extends Table
             ->requirePresence('attach', 'create')
             ->notEmpty('attach');
 
+        $validator
+            ->boolean('active')
+            ->requirePresence('active', 'create')
+            ->notEmpty('active');
+
         return $validator;
     }
 

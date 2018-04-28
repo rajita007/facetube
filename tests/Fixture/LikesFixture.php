@@ -44,8 +44,8 @@ class LikesFixture extends TestFixture
                 'id' => 1,
                 'post_id' => 1,
                 'user_id' => 1,
-                'created' => '2018-04-25 07:34:29',
-                'modified' => '2018-04-25 07:34:29'
+                'created' => '2018-04-25 06:47:04',
+                'modified' => '2018-04-25 06:47:04'
             ],
         ];
         parent::init();

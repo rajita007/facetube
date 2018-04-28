@@ -13,6 +13,7 @@ use Cake\ORM\Entity;
  * @property int $receiver_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
+ * @property bool $active
  *
  * @property \App\Model\Entity\User $sender
  * @property \App\Model\Entity\User $receiver
@@ -37,6 +38,7 @@ class Post extends Entity
         'receiver_id' => true,
         'created' => true,
         'modified' => true,
+        'active' => true,
         'sender' => true,
         'receiver' => true,
         'likes' => true
