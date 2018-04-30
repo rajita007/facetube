@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Posts Model
  *
- * @property \App\Model\Table\SendersTable|\Cake\ORM\Association\BelongsTo $Senders
- * @property \App\Model\Table\ReceiversTable|\Cake\ORM\Association\BelongsTo $Receivers
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Senders
+ * @property \App\Model\Table\UsersTable|\Cake\ORM\Association\BelongsTo $Receivers
  * @property \App\Model\Table\LikesTable|\Cake\ORM\Association\HasMany $Likes
  *
  * @method \App\Model\Entity\Post get($primaryKey, $options = [])
@@ -43,12 +43,12 @@ class PostsTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Senders', [
-            'className'=>'Users',
+            'className' => 'Users',
             'foreignKey' => 'sender_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Receivers', [
-            'className'=>'Users',
+            'className' => 'Users',
             'foreignKey' => 'receiver_id',
             'joinType' => 'INNER'
         ]);
