@@ -145,7 +145,7 @@ class UsersController extends AppController
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
 
-                return $this->redirect(['action' => 'view']);
+                 return $this->redirect(['action' => 'view']);
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
@@ -235,12 +235,7 @@ public function friend($id=null){
     }
     public function ajaxSearch(){
       $post=$this->request->getData();
-
       $user = $this->Users->find()->where(['name'=>$post['description']])->all();
-
-
-          // $this->set('user', $user);
-
 
       }
 
@@ -286,5 +281,11 @@ public function friend($id=null){
            }
            $this->set(compact('user'));
            $this->set('_serialize',['user']);
+    }
+
+    public dummy(){
+      //remove this function after pull
+      pr('here');die;
+
     }
 }
