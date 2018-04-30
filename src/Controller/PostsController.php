@@ -77,23 +77,31 @@ class PostsController extends AppController
 
     }
   }
-    public function post()
+    public function post($id = null)
     {
+        if($id){
+            $this->set('receiver_id',$id);
+        }
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
 
-            // $post['sender_id']=$count;
-            $post['receiver_id']=$loggedInUser['id'];
+
+            $post['sender_id']=$this->Auth->user('id');
+            $post['receiver_id']=$id;
 
             $post= $this->Posts->patchEntity($post,$this->request->getData());
 
 
             //$this->set('_serialize', ['post']);
               $post['active'] = 1;
-           // pr($post); die;
+
+
             if ($this->Posts->save($post)) {
+                pr($post); die;
             }
-          }
+        }
+
+
 }
 
     /**

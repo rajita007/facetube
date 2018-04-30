@@ -145,7 +145,7 @@ class UsersController extends AppController
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
 
-                return $this->redirect(['action' => 'view']);
+                 return $this->redirect(['action' => 'view']);
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
@@ -226,23 +226,27 @@ public function isAuthorized($user)
 
 }
 public function friend($id=null){
-    $userId=$this->Auth->user('id');
+    
+
 
 }
  public function searchData()
     {
 
     }
-    public function ajaxSearch(){
-      $post=$this->request->getData();
-
-      $user = $this->Users->find()->where(['name'=>$post['description']])->all();
-
-
-          // $this->set('user', $user);
-
-
+    public function ajaxSearch($searchText){
+      // pr($searchText); die;
+      // $post=$this->request->getData();
+      //pr($post);die;
+      // $query=$this->Users-findByUsername($post['description']);
+      // pr($query); die;
+       $user = $this->Users->find()->where(['name'=>$searchText])->toArray();
+      $this->set('user',$user);
+      
+      // $this->redirect(['controller'=>'Users','action'=>'add','ajax_search']);
+      // return $this->redirect()->view()
       }
+      public function search(){} 
 
   public function register()
 
@@ -287,4 +291,6 @@ public function friend($id=null){
            $this->set(compact('user'));
            $this->set('_serialize',['user']);
     }
+
+   
 }
