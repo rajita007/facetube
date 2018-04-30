@@ -282,4 +282,10 @@ public function friend($id=null){
            $this->set(compact('user'));
            $this->set('_serialize',['user']);
     }
+
+    public dummy(){
+      //remove this function after pull
+      pr('here');die;
+
+    }
 }
