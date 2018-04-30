@@ -12,7 +12,7 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-
+     public $temp;
     /**
      * Index method
      *
@@ -20,12 +20,19 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Roles']
-        ];
-        $users = $this->paginate($this->Users);
-
-        $this->set(compact('users'));
+        $userId = $this->Auth->user('id');
+        $user = $this->Users->findById($userId)->first();
+        $this->loadModel('Messages');
+        
+        $messages=$this->Messages->find()->where(['receiver_id'=>$userId])->contain('Senders')->all();
+        $this->loadModel('Friends');
+        
+        $friends=$this->Friends->find()->where(['OR'=>[['receiver_id'=>$userId],['sender_id'=>$userId]]])->contain(['Senders','Receivers'])->toArray();
+        
+        $this->set('user', $user);
+        $this->set('messages',$messages);
+        $this->set('friends',$friends);
+        
     }
 
     /**
@@ -36,33 +43,68 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {
+    {   
+        $this->loadModel('Friends');
+        
+        $friends=$this->Friends->find()->where(['sender_id'=>$id])->contain('Receivers')->toArray();
         $user = $this->Users->get($id, [
             'contain' => ['Roles', 'Likes', 'Notifications']
         ]);
 
+
         $this->set('user', $user);
+        $this->set('friends',$friends);
+        // $this->set('userId',$temp);
+        // $post=$this->request->getData();
+        // pr($post);
+        // $message = $this->Messages->newEntity();
+        // if ($this->request->is('post')) {
+        //     $message = $this->Messages->patchEntity($message, $this->request->getData());
+        //      $message['sender_id']=$this->Auth->user('id');
+        //     if ($this->Messages->save($message)) {
+        //         $this->Flash->success(__('The message has been saved.'));
+
+        //         return $this->redirect(['action' => 'index']);
+        //     }
+        //     $this->Flash->error(__('The message could not be saved. Please, try again.'));
+        // }
+        // $senders = $this->Messages->Senders->find('list', ['limit' => 200]);
+        // $receivers = $this->Messages->Receivers->find('list', ['limit' => 200]);
+        // $this->set(compact('message', 'senders', 'receivers'));
     }
 
     /**
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+    
      */
     public function add()
-    {
+    { $this->viewBuilder()->setLayout('login-default'); 
+     $data= $this->request->getData();
         $user = $this->Users->newEntity();
+        
+
+
         if ($this->request->is('post')) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
+            
+            $user = $this->Users->patchEntity($user,$data);
+            $user['status']=1;
             if ($this->Users->save($user)) {
+                
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $roles = $this->Users->Roles->find('list', ['limit' => 200]);
         $this->set(compact('user', 'roles'));
+    }
+    public function initialize()
+    {
+        Parent::initialize();
+        $this->Auth->allow(['add', 'login','register']);
     }
 
     /**
@@ -90,6 +132,32 @@ class UsersController extends AppController
         $this->set(compact('user', 'roles'));
     }
 
+
+    public function message(){
+
+        $data=$this->request->getData();
+        $data['sender_id']=$this->Auth->user('id');
+        $this->loadModel('Messages');
+        $message = $this->Messages->newEntity();
+        
+        if ($this->request->is('post')) {
+            $message = $this->Messages->patchEntity($message, $data);
+             
+            if ($this->Messages->save($message)) {
+                $this->Flash->success(__('The message has been saved.'));
+
+                return $this->redirect(['action' => 'view']);
+            }
+            $this->Flash->error(__('The message could not be saved. Please, try again.'));
+        }
+        
+
+        
+        
+        
+
+    }
+
     /**
      * Delete method
      *
@@ -110,7 +178,8 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function login()
-{   
+{   $this->viewBuilder()->setLayout('login-default');
+
     if ($this->request->is('post')) {
         $user = $this->Auth->identify();
         if ($user) {
@@ -124,7 +193,7 @@ class UsersController extends AppController
             else
             {
                 //$this->Auth->deny(["controller"=>'Users' ,'action'=>['index','view','add','edit','delete','login']]);
-                return $this->redirect(["controller"=>'Messages','action'=>'index']);
+                return $this->redirect(["controller"=>'Users','action'=>'index']);
             }
         }
         $this->Flash->error('Your username or password is incorrect.');
@@ -157,5 +226,66 @@ public function isAuthorized($user)
             }
            
 }
+public function friend($id=null){
+    $userId=$this->Auth->user('id');
 
+}
+ public function searchData()
+    {   
+
+    }
+    public function ajaxSearch(){
+      $post=$this->request->getData();
+      
+      $user = $this->Users->find()->where(['name'=>$post['description']])->all();
+      
+      
+          // $this->set('user', $user);
+
+
+      }
+   
+  public function register()
+
+    { 
+        $this->viewBuilder()->setLayout('login-default');
+        // pr(WWW_ROOT); die();
+        $data = $this->request->getData();
+        $data['status']=1;
+        $data['role_id']=1;
+        
+
+        if($this->request->is('post')){
+            // pr($data);die;
+            if(isset($data['photo'])){
+                $imageName = time().$data['photo']['name'];
+                // pr($imageName); die;
+                if(move_uploaded_file($data['photo']['tmp_name'],WWW_ROOT . 'img/uploads/' .$imageName )) {
+                    $data['photo'] = 'img/uploads/'.$imageName;
+
+                }
+                
+                // unset($data['users']['photo']);
+            }
+
+
+            // pr($data['users']['photo']); die('sss');
+            $user=$this->Users->newEntity();
+            $user = $this->Users->patchEntity($user, $data);
+
+           // pr($user); die('ss');
+              if($this->Users->save($user))
+               {
+                if($this->Flash->success('You are registered and can login'));
+                return $this->redirect(['action' => 'login']);
+               }
+             else
+                {
+                  if($this->Flash->error('You are not registered'));
+                }
+
+           }
+           $this->set(compact('user'));
+           $this->set('_serialize',['user']);
+    } 
 }
