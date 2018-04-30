@@ -236,6 +236,7 @@ public function friend($id=null){
     }
     public function ajaxSearch($searchText){
       // pr($searchText); die;
+      $this->viewBuilder()->setLayout('searchResult-default');
       // $post=$this->request->getData();
       //pr($post);die;
       // $query=$this->Users-findByUsername($post['description']);
