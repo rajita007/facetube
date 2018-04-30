@@ -25,7 +25,7 @@
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
+                                            <?= $this->Html->link(__('View'), ['controller'=>'Posts','action' => 'post', $user->id]) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -236,12 +236,15 @@
             </div>
             
             <script>            
-          
+ 
+
+
 var url1 = '<?= $this->Url->build([
 "controller" => "Users",
 "action" => "message",
 ]);
 ?>';
+
         function message(receiver_id) {
             var message= prompt("Message to");
                     
@@ -259,9 +262,11 @@ var url1 = '<?= $this->Url->build([
                 url: url1,
                 success:function(data) {
                   alert(data);
-                 $("p").text(data);
+                 $("p").text(data);,
+                 // window.location.href = url2;
               },
             });
+
            
         }
 </script>

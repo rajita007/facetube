@@ -226,18 +226,27 @@ public function isAuthorized($user)
 
 }
 public function friend($id=null){
-    $userId=$this->Auth->user('id');
+    
+
 
 }
  public function searchData()
     {
 
     }
-    public function ajaxSearch(){
-      $post=$this->request->getData();
-      $user = $this->Users->find()->where(['name'=>$post['description']])->all();
-
+    public function ajaxSearch($searchText){
+      // pr($searchText); die;
+      // $post=$this->request->getData();
+      //pr($post);die;
+      // $query=$this->Users-findByUsername($post['description']);
+      // pr($query); die;
+       $user = $this->Users->find()->where(['name'=>$searchText])->toArray();
+      $this->set('user',$user);
+      
+      // $this->redirect(['controller'=>'Users','action'=>'add','ajax_search']);
+      // return $this->redirect()->view()
       }
+      public function search(){} 
 
   public function register()
 
@@ -283,9 +292,5 @@ public function friend($id=null){
            $this->set('_serialize',['user']);
     }
 
-    public dummy(){
-      //remove this function after pull
-      pr('here');die;
-
-    }
+   
 }

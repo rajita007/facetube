@@ -56,7 +56,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
                       <div class="form-group" >
                     <div class="result">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top"><button onclick="myFunction()">Click Me</button>
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top"><button onclick="myFunction()"></button>
                 </div></div>
             
         </div>
@@ -203,25 +203,29 @@ var url = '<?= $this->Url->build([
 "action" => "ajaxSearch",
 ]);
 ?>';
+            
         function myFunction() {
-          data = {
-            description: $('#top').val()
-          }
+          // data = {
+          //   description: $('#top').val()
+          // }
             
 
-            $.ajax({
-                type: 'POST',
-                data: data,
-                beforeSend: function(){
-                $("#result").text("loading...");
-              },
-                url: url,
-                success:function(data) {
-                  alert(data);
-                 $("#result").text(data);
-              },
-            });
+          //   $.ajax({
+          //       type: 'POST',
+          //       data: data,
+          //       beforeSend: function(){
+          //       $("#result").text("loading...");
+          //     },
+          //       url: url,
+          //       success:function(data) {
+          //         alert(data);
+          //        $("#result").text(data);
+          //     },
+          //   });
 
+          var searchText = $('#top').val();
+          url = url+'/'+searchText;
+          window.location.href = url;
         }
 </script>
 <style type="text/css">
