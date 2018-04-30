@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
 /**
  * Users Controller
  *
@@ -23,16 +22,16 @@ class UsersController extends AppController
         $userId = $this->Auth->user('id');
         $user = $this->Users->findById($userId)->first();
         $this->loadModel('Messages');
-        
+
         $messages=$this->Messages->find()->where(['receiver_id'=>$userId])->contain('Senders')->all();
         $this->loadModel('Friends');
-        
+
         $friends=$this->Friends->find()->where(['OR'=>[['receiver_id'=>$userId],['sender_id'=>$userId]]])->contain(['Senders','Receivers'])->toArray();
-        
+
         $this->set('user', $user);
         $this->set('messages',$messages);
         $this->set('friends',$friends);
-        
+
     }
 
     /**
@@ -43,9 +42,9 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
-    {   
+    {
         $this->loadModel('Friends');
-        
+
         $friends=$this->Friends->find()->where(['sender_id'=>$id])->contain('Receivers')->toArray();
         $user = $this->Users->get($id, [
             'contain' => ['Roles', 'Likes', 'Notifications']
@@ -77,21 +76,21 @@ class UsersController extends AppController
      * Add method
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-    
+
      */
     public function add()
-    { $this->viewBuilder()->setLayout('login-default'); 
+    { $this->viewBuilder()->setLayout('login-default');
      $data= $this->request->getData();
         $user = $this->Users->newEntity();
-        
+
 
 
         if ($this->request->is('post')) {
-            
+
             $user = $this->Users->patchEntity($user,$data);
             $user['status']=1;
             if ($this->Users->save($user)) {
-                
+
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'login']);
@@ -139,10 +138,10 @@ class UsersController extends AppController
         $data['sender_id']=$this->Auth->user('id');
         $this->loadModel('Messages');
         $message = $this->Messages->newEntity();
-        
+
         if ($this->request->is('post')) {
             $message = $this->Messages->patchEntity($message, $data);
-             
+
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
 
@@ -150,11 +149,11 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
         }
-        
 
-        
-        
-        
+
+
+
+
 
     }
 
@@ -178,14 +177,14 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function login()
-{   $this->viewBuilder()->setLayout('login-default');
-
+{
+  $this->viewBuilder()->setLayout('login-default');
     if ($this->request->is('post')) {
         $user = $this->Auth->identify();
         if ($user) {
             $this->Auth->setUser($user);
             $role=$this->Auth->user('role_id');
-            
+
             if($role===1)
             {
                 return $this->redirect(["controller"=>'Users','action'=>'index']);
@@ -206,14 +205,14 @@ public function logout()
 }
 public function isAuthorized($user)
 {
-    
-    
+
+
     // The add and tags actions are always allowed to logged in users.
    //$user = $this->Auth->identify();
-        
-            //$this->Auth->setUser($user); 
+
+            //$this->Auth->setUser($user);
     $role=$this->Auth->user('role_id');
-           
+
             if($role===1)
             {
                 return true;
@@ -221,39 +220,34 @@ public function isAuthorized($user)
             else
             {
                 $this->redirect(["controller"=>'Messages']);
-                
+
 
             }
-           
+
 }
 public function friend($id=null){
     $userId=$this->Auth->user('id');
 
 }
  public function searchData()
-    {   
+    {
 
     }
     public function ajaxSearch(){
       $post=$this->request->getData();
-      pr($post);die;
       $user = $this->Users->find()->where(['name'=>$post['description']])->all();
-      
-      pr($user);die;
-          // $this->set('user', $user);
-
 
       }
-   
+
   public function register()
 
-    { 
+    {
         $this->viewBuilder()->setLayout('login-default');
         // pr(WWW_ROOT); die();
         $data = $this->request->getData();
         $data['status']=1;
         $data['role_id']=1;
-        
+
 
         if($this->request->is('post')){
             // pr($data);die;
@@ -264,7 +258,7 @@ public function friend($id=null){
                     $data['photo'] = 'img/uploads/'.$imageName;
 
                 }
-                
+
                 // unset($data['users']['photo']);
             }
 
@@ -287,5 +281,5 @@ public function friend($id=null){
            }
            $this->set(compact('user'));
            $this->set('_serialize',['user']);
-    } 
+    }
 }

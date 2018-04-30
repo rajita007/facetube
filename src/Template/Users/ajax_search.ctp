@@ -1,8 +1,8 @@
-<?php if($result):?>
+<!-- <?php if($result):?>
   <table class="table table-striped table-bordered table-hover">
           <thead>
              <th>Field 1</th>
-            
+
           </thead>
           <tbody>
          <?php foreach($result as $applicant){?>
@@ -15,4 +15,4 @@
       </table>
    <?php else:?>
       No results.
-  <?php endif;?>
+  <?php endif;?> -->

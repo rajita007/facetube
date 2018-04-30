@@ -23,14 +23,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
-        
+
      <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">  -->
 
     </title>
-    <?= $this->Html->meta('icon') ?>
 
    <?=  $this->Html->css('style'); ?>
    <?=  $this->Html->css('animate'); ?>
@@ -45,12 +44,12 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div id="wrapper">
     <?= $this->Flash->render() ?>
     <!-- side navigation start -->
-    
+
     <!-- side navigation ends -->
 
-      
+
         <div id="page-wrapper" class="gray-bg">
-        
+
             <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -62,9 +61,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             
         </div>
             <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
-                
-                  
-                
+
+
+
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
