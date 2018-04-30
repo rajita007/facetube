@@ -37,3 +37,7 @@ var url = '<?= $this->Url->build([
 
         }
 </script>
+<<<<<<< HEAD
+=======
+ -->
+>>>>>>> 27ec6dc2dbceb6a882fbfbe293a9c53ecdf277b4
