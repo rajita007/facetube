@@ -24,19 +24,19 @@
         ?>
     </fieldset>
     <?= $this->Form->end() ?>
-    <button id="but">Click Me</button>
+    <button onclick="post()" id="but" >Click Me</button>
 
 </div>
 <script>
-  var url = '<?= $this->Url->build([
+  var url2 = '<?= $this->Url->build([
   "controller" => "Posts",
   "action" => "post",
   ]);
   ?>';
   // $(document).ready(function(){
-          $("#but").click(function(){
-
-            data = {
+          function post(){
+            alert('success');
+            post = {
               description: $('#des').val(),
               attach: $('#att').val()
             }
@@ -44,14 +44,14 @@
 
               $.ajax({
                   type: 'POST',
-                  url: url,
-                  data: data,
+                  url: url2,
+                  data: post,
                   success: function(data) {
                       alert(data);
                       $("p").text(data);
 
                   }
               });
-     });
+     }
   // });
 </script>

@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
 /**
  * Users Controller
  *
@@ -179,6 +178,7 @@ class UsersController extends AppController
     }
     public function login()
 {
+  $this->viewBuilder()->setLayout('login-default');
     if ($this->request->is('post')) {
         $user = $this->Auth->identify();
         if ($user) {

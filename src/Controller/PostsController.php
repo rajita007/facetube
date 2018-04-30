@@ -75,35 +75,25 @@ class PostsController extends AppController
 
 
 
-    }}
+    }
+  }
     public function post()
     {
-
-        $count=1;
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
 
             $post['sender_id']=$count;
             $post['receiver_id']=$count;
-            $post['active'] = 1;
+
             $post= $this->Posts->patchEntity($post,$this->request->getData());
 
+
             //$this->set('_serialize', ['post']);
-
-          // pr($post); die;
+              $post['active'] = 1;
+           // pr($post); die;
             if ($this->Posts->save($post)) {
-
-              $this->Flash->success(__('The post has been saved.'));
             }
-
-
-
-
-
-
-
-
-}
+          }
 }
 
     /**
@@ -161,7 +151,7 @@ class PostsController extends AppController
 
         // pr($post); die;
           if ($this->Likes->save($like)) {
-            
+
           }
           $data['post_id']=$like['post_id'];
           $likes=$this->Likes->find()->where(['post_id'=>$data['post_id']])->all();
