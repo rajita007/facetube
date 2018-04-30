@@ -28,7 +28,7 @@
                                             <button type="button" onclick='message(<?= $users->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button addfriend" class="btn btn-default btn-sm btn-block" onclick='add()' id="addF"><i class="fa fa-coffee"></i> Add Friend</button>
+                                            <button type="button" class="btn btn-default btn-sm btn-block"  onclick='add()' id="addF"><i class="fa fa-coffee"></i> Add Friend</button>
                                         </div>
                                     </div>
                                 </div>
@@ -81,6 +81,7 @@ var url1 = '<?= $this->Url->build([
 .gray-bg {
    background-image: url("http://localhost/facetube/img/123.png");
 }
+.addfriend
 </style>
 
 
