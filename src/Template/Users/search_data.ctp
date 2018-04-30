@@ -1,4 +1,4 @@
-<!-- <h3>Search Result</h3>
+<h3>Search Result</h3>
 <div class="result">
  <?php
 
@@ -11,12 +11,12 @@
 <button onclick="myFunction()">Click Me</button>
 </div>
 <script>
-  function myFunction() {
-    var url = '<?= $this->Url->build([
-    "controller" => "Users",
-    "action" => "ajaxSearch",
-    ]);
-    ?>';
+var url = '<?= $this->Url->build([
+"controller" => "Users",
+"action" => "ajaxSearch",
+]);
+?>';
+        function myFunction() {
           data = {
             description: $('#field').val()
           }
@@ -37,4 +37,7 @@
 
         }
 </script>
+<<<<<<< HEAD
+=======
  -->
+>>>>>>> 27ec6dc2dbceb6a882fbfbe293a9c53ecdf277b4

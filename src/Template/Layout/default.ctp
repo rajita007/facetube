@@ -23,14 +23,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <title>
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
-        
+
      <!-- <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
     <link href="css/animate.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">  -->
 
     </title>
-    <?= $this->Html->meta('icon') ?>
 
    <?=  $this->Html->css('style'); ?>
    <?=  $this->Html->css('animate'); ?>
@@ -45,27 +44,26 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div id="wrapper">
     <?= $this->Flash->render() ?>
     <!-- side navigation start -->
-    
+
     <!-- side navigation ends -->
 
-      
+
         <div id="page-wrapper" class="gray-bg">
-        
+
             <div class="row border-bottom">
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            <form role="search" class="navbar-form-custom" >
-                <div class="form-group" >
+                      <div class="form-group" >
                     <div class="result">
-                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top"><button onclick="myFunction()">Click Me</button>
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top"><button onclick="myFunction()"></button>
                 </div></div>
-            </form>
+            
         </div>
             <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
-                
-                  
-                
+
+
+
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
@@ -172,19 +170,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <!-- top nav start -->
             <div class="row wrapper border-bottom white-bg page-heading">
-                <div class="col-lg-10">
+                <div class="gray-bg">
                     <h2>FaceTube</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">Home</a>
-                        </li>
-                        <li>
-                            <a>Extra Pages</a>
-                        </li>
-                        <li class="active">
-                            <strong>FaceTube</strong>
-                        </li>
-                    </ol>
+                    
                 </div>
                 <div class="col-lg-2">
 
@@ -215,26 +203,34 @@ var url = '<?= $this->Url->build([
 "action" => "ajaxSearch",
 ]);
 ?>';
+            
         function myFunction() {
-          data = {
-            description: $('#top').val()
-          }
-            alert(data);
+          // data = {
+          //   description: $('#top').val()
+          // }
+            
 
-            $.ajax({
-                type: 'POST',
-                data: data,
-                beforeSend: function(){
-                $("#result").text("loading...");
-              },
-                url: url,
-                success:function(data) {
-                  alert(data);
-                 $("#result").text(data);
-              },
-            });
+          //   $.ajax({
+          //       type: 'POST',
+          //       data: data,
+          //       beforeSend: function(){
+          //       $("#result").text("loading...");
+          //     },
+          //       url: url,
+          //       success:function(data) {
+          //         alert(data);
+          //        $("#result").text(data);
+          //     },
+          //   });
 
+          var searchText = $('#top').val();
+          url = url+'/'+searchText;
+          window.location.href = url;
         }
 </script>
-
+<style type="text/css">
+.gray-bg {
+   background-image: url("http://localhost/facetube/img/123.png");
+}
+</style>
 </html>

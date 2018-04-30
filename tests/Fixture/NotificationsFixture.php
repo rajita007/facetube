@@ -46,8 +46,8 @@ class NotificationsFixture extends TestFixture
                 'user_id' => 1,
                 'notificationType_id' => 1,
                 'object_id' => 1,
-                'created' => '2018-04-25 06:47:04',
-                'modified' => '2018-04-25 06:47:04'
+                'created' => '2018-04-25 07:34:29',
+                'modified' => '2018-04-25 07:34:29'
             ],
         ];
         parent::init();

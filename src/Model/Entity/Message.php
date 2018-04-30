@@ -13,8 +13,8 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime $modified
  *
- * @property \App\Model\Entity\Sender $sender
- * @property \App\Model\Entity\Receiver $receiver
+ * @property \App\Model\Entity\User $sender
+ * @property \App\Model\Entity\User $receiver
  */
 class Message extends Entity
 {

@@ -5,7 +5,7 @@
                             <h5>Profile Detail</h5>
                         </div>
 
-                        <div>
+                        <div class="gray-bg">
                             <div class="ibox-content no-padding border-left-right">
                                 <img alt="image" class="img-responsive" src="img/profile_big.jpg">
                             </div>
@@ -18,27 +18,14 @@
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
                                 </p>
-                                <div class="row m-t-lg">
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>169</strong> Posts</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="line">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>28</strong> Following</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
-                                        <h5><strong>240</strong> Followers</h5>
-                                    </div>
-                                </div>
+                                
                                 <div class="user-button">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
+                                            <?= $this->Html->link(__('View'), ['controller'=>'Posts','action' => 'post', $user->id]) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -249,12 +236,15 @@
             </div>
             
             <script>            
-          
+ 
+
+
 var url1 = '<?= $this->Url->build([
 "controller" => "Users",
 "action" => "message",
 ]);
 ?>';
+
         function message(receiver_id) {
             var message= prompt("Message to");
                     
@@ -272,11 +262,18 @@ var url1 = '<?= $this->Url->build([
                 url: url1,
                 success:function(data) {
                   alert(data);
-                 $("p").text(data);
+                 $("p").text(data);,
+                 // window.location.href = url2;
               },
             });
+
            
         }
 </script>
-
+<style type="text/css">
+.gray-bg {
+   background-image: url("http://localhost/facetube/img/123.png");
+}
+</style>
+</html>
                             
