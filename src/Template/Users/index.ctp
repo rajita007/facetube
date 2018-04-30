@@ -214,7 +214,7 @@
                                 <h3><i class="fa fa-envelope-o"></i> All Friends</h3>
                                 <small><i class="fa fa-tim"></i> </small>
                             </div>
-                            
+
                             <div class="ibox-content">
                                 <div class="feed-activity-list">
                                     <?php foreach($friends as $friend):?>
@@ -226,13 +226,13 @@
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->receiver_id]) ?></small>
                                             <strong><?= $friend->receiver->name ?></strong>
                                             <div><?= $friend->receiver->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
                                        <?php else: ?>
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->sender_id]) ?></small>
                                             <strong><?= $friend->sender->name ?></strong>
                                             <div><?= $friend->sender->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
 
                                        <?php endif; ?>
@@ -240,9 +240,9 @@
                                     </div>
                             <?php endforeach; ?>
 
-                                   
+
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@
                                 <h3><i class="fa fa-envelope-o"></i> New messages</h3>
                                 <small><i class="fa fa-tim"></i> </small>
                             </div>
-                            
+
                             <div class="ibox-content">
                                 <div class="feed-activity-list">
                                     <?php foreach($messages as $message):?>
@@ -278,4 +278,3 @@
                                         </div>
                                     </div>
                             <?php endforeach; ?>
-                            

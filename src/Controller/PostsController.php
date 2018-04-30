@@ -82,8 +82,8 @@ class PostsController extends AppController
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
 
-            $post['sender_id']=$count;
-            $post['receiver_id']=$count;
+            // $post['sender_id']=$count;
+            $post['receiver_id']=$loggedInUser['id'];
 
             $post= $this->Posts->patchEntity($post,$this->request->getData());
 

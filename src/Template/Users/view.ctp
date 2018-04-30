@@ -213,7 +213,7 @@
                                 <h3><i class="fa fa-envelope-o"></i> All</h3>
                                 <small><i class="fa fa-tim"></i> You have 22 new messages and 16 waiting in draft folder.</small>
                             </div>
-                            
+
                             <div class="ibox-content">
                                 <div class="feed-activity-list">
                                     <?php foreach($friends as $friend):?>
@@ -225,13 +225,13 @@
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->receiver_id]) ?></small>
                                             <strong><?= $friend->receiver->name ?></strong>
                                             <div><?= $friend->receiver->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
                                        <?php else: ?>
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->sender_id]) ?></small>
                                             <strong><?= $friend->sender->name ?></strong>
                                             <div><?= $friend->sender->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
 
                                        <?php endif; ?>
@@ -240,16 +240,16 @@
                             <?php endforeach; ?>
 
 
-                                   
+
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>
             </div>
-            
-            <script>            
-          
+
+            <script>
+
 var url1 = '<?= $this->Url->build([
 "controller" => "Users",
 "action" => "message",
@@ -257,7 +257,7 @@ var url1 = '<?= $this->Url->build([
 ?>';
         function message(receiver_id) {
             var message= prompt("Message to");
-                    
+
              console.log(message);
 
           message = {
@@ -265,7 +265,7 @@ var url1 = '<?= $this->Url->build([
             receiver_id: receiver_id
           }
           alert(message);
-           
+
             $.ajax({
                 type: 'POST',
                 data: message,
@@ -275,8 +275,6 @@ var url1 = '<?= $this->Url->build([
                  $("p").text(data);
               },
             });
-           
+
         }
 </script>
-
-                            
