@@ -23,7 +23,7 @@ class PostsController extends AppController
     {
 
 
-        $posts = $this->Posts->find()->contain(['Likes'])->all();
+        $posts = $this->Posts->find()->contain(['Senders','Likes'])->all();
 
         $this->set(compact('posts'));
 
@@ -79,16 +79,18 @@ class PostsController extends AppController
   }
     public function post($id = null)
     {   
+        $pr($id); die;
         if($id){
             $this->set('receiver_id',$id);
         }
+
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
             
 
             $post['sender_id']=$this->Auth->user('id');
             $post['receiver_id']=$id;
-             
+             pr($post); die;
             $post= $this->Posts->patchEntity($post,$this->request->getData());
 
 

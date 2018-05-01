@@ -24,7 +24,7 @@
                                 <div id="dem" class="user-button">
                                     <div class="row">
                                         <div class="col-md-6">
-                                           <input type="button" class="btn btn-w-m btn-success" title="Click to Deactivate" value="Add Post " onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"index"]); ?>'" >
+                                            <?= $this->Html->link(__('View'), ['controller'=>'post','action' => 'post', $user->id]) ?>
                                         </div>
                                        <!--  <div class="col-md-6">
                                             <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
@@ -269,4 +269,7 @@
                                         </div>
                                     </div>
                             <?php endforeach; ?>
+        
+        
+
                             

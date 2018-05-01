@@ -269,7 +269,7 @@
                             <div class="social-avatar">
                                 <div class="media-body">
                                     <a href="#">
-                                      <td><?= h($post->id) ?></td>
+                                      <td><?= $post->sender->name ?></td>
                                     </a>
                                     <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
                                 </div>
@@ -292,42 +292,7 @@
                       </tr>
                         <?php endforeach; ?>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="social-feed-separated">
-                          <?php foreach ($posts as $post): ?>
-                            <tr>
-                            <div class="social-feed-box">
-
-                                <div class="pull-right social-action dropdown">
-                                    <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                        <i class="fa fa-angle-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu m-t-xs">
-                                        <li><a href="#">Config</a></li>
-                                    </ul>
-                                </div>
-                                <div class="social-avatar">
-                                    <a href="#">
-                                          <td><?= h($post->id) ?></td>
-                                    </a>
-                                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
-                                </div>
-                                <div class="social-body">
-                                    <p>
-                                          <td><?= h($post->description) ?></td>
-                                    </p>
-                                    <div class="btn-group">
-                                        <button class="btn btn-white btn-xs"><i class="fa fa-thumbs-up"></i> Like this!</button>
-                                        <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button>
-                                        <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button>
-                                    </div>
-                                </div>
-                            </div>
-                          </tr>
-                          <?php endforeach; ?>
-                        </div>
-
-                    </div>
+                   
                 </div>
             </div>
 

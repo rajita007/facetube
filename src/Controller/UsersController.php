@@ -11,14 +11,17 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-     public $temp;
+    
     /**
      * Index method
      *
      * @return \Cake\Http\Response|void
      */
     public function index()
-    {
+    {   $data=$this->request->getData();
+        
+        $this->loadModel('Friends');
+
         $userId = $this->Auth->user('id');
         $user = $this->Users->findById($userId)->first();
         $this->loadModel('Messages');
@@ -31,8 +34,30 @@ class UsersController extends AppController
         $this->set('user', $user);
         $this->set('messages',$messages);
         $this->set('friends',$friends);
-        $friendRequests=$this->Friends->find()->where(['receiver_id'=>$userId,'Friends.status'=>0])->contain('Senders')->toArray();
         
+        
+    }
+
+    public function handleRequest($id, $accept) {
+      $this->loadModel('Friends');
+
+      $request = $this->Friends->findById($id)->first();
+
+      if($accept){
+        $request->status = 1;
+      }else{
+        $request->status = null;        
+      }
+
+      if(!$this->Friends->save($request)){
+        throw new Exception("Error Processing Request", 1);
+      }
+
+      $status = true;
+      // $this->set(compact('status', 'request'))
+      // $this->set('_serialize',['status','request']);
+pr($request); die;
+     
     }
 
     /**

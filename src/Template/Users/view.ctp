@@ -25,7 +25,7 @@
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="button" class="btn btn-danger" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"add"]); ?>'" >
+                                            <input type="button" class="btn btn-danger" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"post"]); ?>'" >
                                         </div>
                                     </div>
                                 </div>
