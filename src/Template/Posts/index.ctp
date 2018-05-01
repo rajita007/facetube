@@ -23,29 +23,10 @@
     <div id="wrapper">
 
 
-        <div >
-        <div >
-        <nav >
-
-        <ul>
-
-                <li>
-                    <a href="login.html">
-                        <i class="fa fa-sign-out"></i> Log out
-                    </a>
-                </li>
-                <li>
-                  <?php echo $this->Html->link(
-                  'Add Post',
-                  ['controller' => 'Posts', 'action' => 'add']
-                  ); ?>
-
-                </li>
-            </ul>
-
-        </nav>
-        <?= pr($data); die;?>
         </div>
+    </nav> -->
+
+
             <div class="wrapper wrapper-content  animated fadeInRight">
                 <div class="row">
 
