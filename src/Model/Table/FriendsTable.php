@@ -66,9 +66,10 @@ class FriendsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->boolean('status')
-            ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->boolean('status');
+           // ->requirePresence('status', 'create')
+            //->notEmpty('status'
+
 
         return $validator;
     }
