@@ -24,7 +24,8 @@ class PostsController extends AppController
 
 
         $posts = $this->Posts->find()->contain(['Likes'])->all();
-
+        $data = $this->Posts->find()->contain(['Senders'])->all();
+        pr($data); die;
         $this->set(compact('posts'));
 
     }
