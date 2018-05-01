@@ -24,10 +24,13 @@
                                 <div id="dem" class="user-button">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope" onclick='document.getElementById("dem").style.display = "none"'></i> Send Message</button>
+                                           <input type="button" class="btn btn-w-m btn-success" title="Click to Deactivate" value="Add Post " onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"index"]); ?>'" >
                                         </div>
-                                        <div class="col-md-6">
+                                       <!--  <div class="col-md-6">
                                             <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
+                                        </div> -->
+                                        <div class="col-md-6">
+                                           <input type="button" class="btn btn-w-m btn-danger" title="Click to Deactivate" value="View Timeline" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"index"]); ?>'" >
                                         </div>
                                     </div>
                                 </div>

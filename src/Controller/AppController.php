@@ -91,8 +91,16 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
-        $loggedInUser=$this->Auth->user();
-        $this->set(compact('loggedInUser'));
+        
+
+    }
+    public function beforeRender(Event $event)
+    {   $friendRequests=  null;
+        $this->loadModel('Friends'); 
+                $friendRequests=$this->Friends->find()->where(['receiver_id'=>$this->Auth->user('id'),'Friends.status'=>0])->contain('Senders')->toArray();
+
+                $this->set('friendRequests',$friendRequests);
+                
 
     }
 }
