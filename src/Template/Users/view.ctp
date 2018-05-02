@@ -7,7 +7,7 @@
 
                         <div class="gray-bg">
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src=<?php echo $user->photo ?>>
+                                <?= $this->Html->image('/'.$user['photo'], ['alt' => 'IMAGE']) ?>
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $user['name'] ?> </strong></h4>
@@ -16,7 +16,7 @@
                                     About me
                                 </h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                                    <?php echo $user['email']; ?>
                                 </p>
                                 
                                 <div class="user-button">
@@ -25,7 +25,7 @@
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="button" class="btn btn-danger" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"post"]); ?>'" >
+                                            <input type="button" class="btn btn-danger" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"add"]); ?>'" >
                                         </div>
                                     </div>
                                 </div>

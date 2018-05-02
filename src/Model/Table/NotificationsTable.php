@@ -50,10 +50,10 @@ class NotificationsTable extends Table
             'foreignKey' => 'notificationType_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Objects', [
-            'foreignKey' => 'object_id',
-            'joinType' => 'INNER'
-        ]);
+        // $this->belongsTo('Objects', [
+        //     'foreignKey' => 'object_id',
+        //     'joinType' => 'INNER'
+        // ]);
     }
 
     /**
@@ -82,7 +82,7 @@ class NotificationsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['notificationType_id'], 'NotificationTypes'));
-        $rules->add($rules->existsIn(['object_id'], 'Objects'));
+        // $rules->add($rules->existsIn(['object_id'], 'Objects'));
 
         return $rules;
     }

@@ -19,7 +19,8 @@ class UsersController extends AppController
      */
     public function index()
     {   $data=$this->request->getData();
-        
+        $this->loadModel('Notifications');
+
         $this->loadModel('Friends');
 
         $userId = $this->Auth->user('id');
@@ -35,7 +36,8 @@ class UsersController extends AppController
         $this->set('messages',$messages);
         $this->set('friends',$friends);
         
-        
+        $notifications=$this->Notifications->findById($userId)->toArray();
+        $this->set('notifications',$notifications);
     }
 
     public function handleRequest($id, $accept) {
@@ -45,6 +47,17 @@ class UsersController extends AppController
 
       if($accept){
         $request->status = 1;
+        $this->loadModel('Notifications');
+        $user=[];
+        $new = $this->Notifications->newEntity();
+        $user['user_id']=$this->Auth->user('id');
+        $user['notificationType_id']=2;
+        $user['object_id']=$id;
+        $new = $this->Notifications->patchEntity($new,$user);
+        
+        if(!$this->Notifications->save($new)){
+          throw new Exception("Error Processing Request", 1);        
+        }
       }else{
         $request->status = null;        
       }
@@ -54,9 +67,9 @@ class UsersController extends AppController
       }
 
       $status = true;
-      // $this->set(compact('status', 'request'))
-      // $this->set('_serialize',['status','request']);
-pr($request); die;
+      $this->set('status', $status);
+      $this->set('request', $request);
+      $this->set('_serialize',['status','request']);
      
     }
 
@@ -169,7 +182,18 @@ pr($request); die;
             $message = $this->Messages->patchEntity($message, $data);
 
             if ($this->Messages->save($message)) {
-                $this->Flash->success(__('The message has been saved.'));
+        
+        $user=[];
+        $new = $this->Notifications->newEntity();
+        $user['user_id']=$message['receiver_id'];
+        $user['notificationType_id']=1;
+        $user['object_id']=$message->id;
+        $new = $this->Notifications->patchEntity($new,$user);
+        
+        if(!$this->Notifications->save($new)){
+          throw new Exception("Error Processing Request", 1);        
+        }
+
 
                  //return $this->redirect(['action' => 'vie']);
             }

@@ -41,8 +41,8 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
+    'enableBeforeRedirect' => false,
+]);
 
 
         $this->loadComponent('Flash');
@@ -94,7 +94,7 @@ class AppController extends Controller
         
 
     }
-    public function beforeRender(Event $event)
+    public function beforeFilter(Event $event)
     {   
         $user = $this->Auth->user();
         $friendRequests=  null;

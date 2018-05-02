@@ -11,7 +11,7 @@
                                 <img class="img-responsive" src=<?php echo $user['photo'];?>>
                             </div>
                             <div class="ibox-content profile-content">
-                                <h4><strong><?php echo $user['name'] ?> </strong></h4>
+                                <h4><strong><?php echo $user['name']; ?> </strong></h4>
                                 <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
                                 <h5>
                                     About me
@@ -213,13 +213,13 @@
                                         <div>
 
                                        <?php if($friend->sender_id == $user->id): ?>
-
+                                             <?= $this->Html->image('/'.$friend->receiver['photo'], ['class'=>"img-circle"]) ?>
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->receiver_id]) ?></small>
-                                            <strong><?= $friend->receiver->name ?></strong>
+                                            <strong><tr><?= $friend->receiver->name ?></tr></strong>
                                             <div><?= $friend->receiver->email?></div>
                                             
                                             <small class="text-muted"></small>
-                                       <?php else: ?>
+                                       <?php else: ?><?= $this->Html->image('/'.$friend->sender['photo'], ['class'=>"img-circle"]) ?>
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->sender_id]) ?></small>
                                             <strong><?= $friend->sender->name ?></strong>
                                             <div><?= $friend->sender->email?></div>
