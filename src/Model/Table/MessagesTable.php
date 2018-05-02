@@ -51,6 +51,9 @@ class MessagesTable extends Table
             'foreignKey' => 'receiver_id',
             'joinType' => 'INNER'
         ]);
+         $this->hasMany('Notifications', [
+            'foreignKey' => 'object_id'
+        ]);
     }
 
     /**

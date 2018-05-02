@@ -36,8 +36,8 @@ class UsersController extends AppController
         $this->set('messages',$messages);
         $this->set('friends',$friends);
         
-        $notifications=$this->Notifications->findById($userId)->toArray();
-        $this->set('notifications',$notifications);
+        // $notifications=$this->Notifications->findById($userId)->toArray();
+        // $this->set('notifications',$notifications);
     }
 
     public function handleRequest($id, $accept) {
@@ -197,7 +197,7 @@ class UsersController extends AppController
 
                  //return $this->redirect(['action' => 'vie']);
             }
-            $this->Flash->error(__('The message could not be saved. Please, try again.'));
+            
         
 
 

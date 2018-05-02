@@ -50,6 +50,24 @@ class NotificationsTable extends Table
             'foreignKey' => 'notificationType_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Messages', [
+            
+            'foreignKey' => 'object_id',
+            'joinType' => 'INNER'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 1
+
+            // ]
+        ]);
+        $this->belongsTo('Friends', [
+            
+            'foreignKey' => 'object_id',
+            'joinType' => 'INNER'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 2
+
+            // ]
+        ]);
         // $this->belongsTo('Objects', [
         //     'foreignKey' => 'object_id',
         //     'joinType' => 'INNER'
