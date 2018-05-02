@@ -90,20 +90,28 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                        
                     </ul>
                 </li>
+                
+
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        <i class="fa fa-bell"></i>  <span class="label label-primary"><?php echo sizeof($notifications) ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
+                        <?php foreach($notifications as $notification): ?>
+                        <?php  if(($notification->notificationType_id)==1):?>
+                        <li> 
+                            
                                 <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                    <i class="fa fa-envelope fa-fw"></i> <?= $user->id ?>
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
                         </li>
+                      
+                    
                         <li class="divider"></li>
+                        <?php endif;?>
+                        <?php  if(($notification->notificationType_id)==2):?>
                         <li>
                             <a href="profile.html">
                                 <div>
@@ -112,7 +120,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 </div>
                             </a>
                         </li>
+                        
                         <li class="divider"></li>
+                        <?php endif;?>
+                        <?php  if(($notification->notificationType_id)==3):?>
                         <li>
                             <a href="grid_options.html">
                                 <div>
@@ -121,8 +132,21 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 </div>
                             </a>
                         </li>
+                          <?php endif;?>
+                           <?php  if(($notification->notificationType_id)==3):?>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                          <?php endif;?>
+                    <?php endforeach;?>
                         <li class="divider"></li>
                         <li>
+
                             <div class="text-center link-block">
                                 <a href="notifications.html">
                                     <strong>See All Alerts</strong>
@@ -213,6 +237,7 @@ var url = '<?= $this->Url->build([
           $.ajax({
                 type: 'GET',
                 url: url3,
+                headers: { 'Accept': 'application/json', 'content-type': 'application/json' },
                 beforeSend: function(){
                   $("#result").text("loading...");
                 },
