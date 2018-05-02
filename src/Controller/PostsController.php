@@ -23,11 +23,8 @@ class PostsController extends AppController
   {
 
 
-    //$posts = $this->Posts->find()->contain(['Likes'])->all();
-    $data = $this->Posts->find()->contain(['Senders',"Likes"])->toArray();
-    //pr($data); die;
-    //$this->set(compact('posts'));
-    $this->set(compact('data'));
+        $posts = $this->Posts->find()->contain(['Senders','Likes'])->all();
+        $this>set(compact('posts'));
 
 
   }
@@ -80,15 +77,21 @@ class PostsController extends AppController
 
     }
   }
-  public function post($id = null)
-  {
-      $this->loadModel('Notifications');
-    if($id){
-      $this->set('receiver_id',$id);
-    }
-    $data=$this->request->getData();
+    public function post($id = null)
+    {
+        $pr($id); die;
+        if($id){
+            $this->set('receiver_id',$id);
+        }
 
-    if ($this->request->is('post')) {
+        $post = $this->Posts->newEntity();
+        if ($this->request->is('post')) {
+
+
+            $post['sender_id']=$this->Auth->user('id');
+            $post['receiver_id']=$id;
+             pr($post); die;
+            $post= $this->Posts->patchEntity($post,$this->request->getData());
 
 
 
