@@ -23,9 +23,12 @@ class PostsController extends AppController
     {
 
 
-        $posts = $this->Posts->find()->contain(['Likes'])->all();
+        //$posts = $this->Posts->find()->contain(['Likes'])->all();
+        $data = $this->Posts->find()->contain(['Senders',"Likes"])->toArray();
+        //pr($data); die;
+        //$this->set(compact('posts'));
+        $this->set(compact('data'));
 
-        $this->set(compact('posts'));
 
     }
 
@@ -38,11 +41,11 @@ class PostsController extends AppController
      */
     public function view($id = null)
     {
-        $post = $this->Posts->get($id, [
-            'contain' => ['Senders', 'Receivers', 'Likes']
-        ]);
-
+      //$post = $this->Posts->find()->contain(['Likes'])->all();
+      $post=$this->Posts->find()->where(['receiver_id'=>$id])->contain(['Senders','Likes'])->toArray();
+        //pr($post); die;
         $this->set('post', $post);
+        $this->set(compact('posts'));
 
     }
 
@@ -51,7 +54,7 @@ class PostsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null  )
     {
 
 
@@ -78,30 +81,32 @@ class PostsController extends AppController
     }
   }
     public function post($id = null)
-    {   
+    {
         if($id){
             $this->set('receiver_id',$id);
         }
+        $data=$this->request->getData();
         $post = $this->Posts->newEntity();
         if ($this->request->is('post')) {
-            
+
 
             $post['sender_id']=$this->Auth->user('id');
             $post['receiver_id']=$id;
-             
-            $post= $this->Posts->patchEntity($post,$this->request->getData());
+
+            $post= $this->Posts->patchEntity($post,$data);
 
 
             //$this->set('_serialize', ['post']);
               $post['active'] = 1;
 
-           
+              pr($data);die;
             if ($this->Posts->save($post)) {
-                pr($post); die;
+
+              return $this->redirect(['controller'=>'Users','action'=>'index']);
             }
         }
 
-        
+
 }
 
     /**
@@ -151,10 +156,11 @@ class PostsController extends AppController
     }
     public function like(){
         $this->loadModel('Likes');
+
       $like = $this->Likes->newEntity();
       if ($this->request->is('post')) {
           $like= $this->Likes->patchEntity($like,$this->request->getData());
-
+        //pr($like); die;
           //$this->set('_serialize', ['post']);
 
         // pr($post); die;

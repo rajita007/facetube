@@ -26,11 +26,12 @@ class UsersController extends AppController
         $messages=$this->Messages->find()->where(['receiver_id'=>$userId])->contain('Senders')->all();
         $this->loadModel('Friends');
 
-        $friends=$this->Friends->find()->where(['OR'=>[['receiver_id'=>$userId],['sender_id'=>$userId]]])->contain(['Senders','Receivers'])->toArray();
+        $friends=$this->Friends->find()->where(['OR'=>[['receiver_id'=>$userId],['sender_id'=>$userId]],'Friends.status'=>1])->contain(['Senders','Receivers'])->toArray();
 
         $this->set('user', $user);
         $this->set('messages',$messages);
         $this->set('friends',$friends);
+        $friendRequests=$this->Friends->find()->where(['receiver_id'=>$userId,'Friends.status'=>0])->contain('Senders')->toArray();
 
     }
 
@@ -46,10 +47,11 @@ class UsersController extends AppController
         $this->loadModel('Friends');
 
         $friends=$this->Friends->find()->where(['sender_id'=>$id])->contain('Receivers')->toArray();
+        //pr($friends); die;
         $user = $this->Users->get($id, [
-            'contain' => ['Roles', 'Likes', 'Notifications']
+            'contain' => ['Likes', 'Notifications']
         ]);
-
+          //pr($user); die;
 
         $this->set('user', $user);
         $this->set('friends',$friends);
@@ -139,16 +141,16 @@ class UsersController extends AppController
         $this->loadModel('Messages');
         $message = $this->Messages->newEntity();
 
-        if ($this->request->is('post')) {
+
             $message = $this->Messages->patchEntity($message, $data);
 
             if ($this->Messages->save($message)) {
                 $this->Flash->success(__('The message has been saved.'));
 
-                 return $this->redirect(['action' => 'view']);
+                 //return $this->redirect(['action' => 'vie']);
             }
             $this->Flash->error(__('The message could not be saved. Please, try again.'));
-        }
+
 
 
 
@@ -225,8 +227,27 @@ public function isAuthorized($user)
             }
 
 }
-public function friend($id=null){
-    
+public function friend(){
+  $data=$this->request->getData();
+
+  $this->loadModel('Friends');
+  $friend = $this->Friends->newEntity();
+  $friend['sender_id']=$this->Auth->user('id');
+  $friend['receiver_id']=$data['receiver_id'];
+  $friend['status']=0;
+
+        if ($this->request->is('post')) {
+            $friend = $this->Friends->patchEntity($friend, $data);
+
+            if ($this->Friends->save($friend)) {
+
+                //$this->Flash->success(__('The friend has been saved.'));
+
+
+            }
+            //$this->Flash->error(__('The friend could not be saved. Please, try again.'));
+        }
+
 
 
 }
@@ -236,17 +257,18 @@ public function friend($id=null){
     }
     public function ajaxSearch($searchText){
       // pr($searchText); die;
+      $this->viewBuilder()->setLayout('searchResult-default');
       // $post=$this->request->getData();
       //pr($post);die;
       // $query=$this->Users-findByUsername($post['description']);
       // pr($query); die;
        $user = $this->Users->find()->where(['name'=>$searchText])->toArray();
       $this->set('user',$user);
-      
+
       // $this->redirect(['controller'=>'Users','action'=>'add','ajax_search']);
       // return $this->redirect()->view()
       }
-      public function search(){} 
+      public function search(){}
 
   public function register()
 
@@ -292,5 +314,5 @@ public function friend($id=null){
            $this->set('_serialize',['user']);
     }
 
-   
+
 }

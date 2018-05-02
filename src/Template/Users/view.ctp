@@ -7,7 +7,7 @@
 
                         <div class="gray-bg">
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src="img/profile_big.jpg">
+                                <img alt="image" class="img-responsive" src=<?php echo $user->photo ?>>
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $user['name'] ?> </strong></h4>
@@ -18,14 +18,17 @@
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
                                 </p>
-                                
+
                                 <div class="user-button">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <?= $this->Html->link(__('View'), ['controller'=>'Posts','action' => 'post', $user->id]) ?>
+                                            <input type="button" class="btn btn-danger btn-sm btn-block" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"post",$user->id]); ?>'" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="button" class="btn btn-info btn-sm btn-block" title="Add Post" value="View Timeline" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"view",$user->id]); ?>'" >
                                         </div>
                                     </div>
                                 </div>
@@ -200,7 +203,7 @@
                                 <h3><i class="fa fa-envelope-o"></i> All</h3>
                                 <small><i class="fa fa-tim"></i> You have 22 new messages and 16 waiting in draft folder.</small>
                             </div>
-                            
+
                             <div class="ibox-content">
                                 <div class="feed-activity-list">
                                     <?php foreach($friends as $friend):?>
@@ -212,13 +215,13 @@
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->receiver_id]) ?></small>
                                             <strong><?= $friend->receiver->name ?></strong>
                                             <div><?= $friend->receiver->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
                                        <?php else: ?>
                                             <small class="pull-right text-navy"><?= $this->Html->link('View Profile', ['controller' => 'Users', 'action' => 'view', $friend->sender_id]) ?></small>
                                             <strong><?= $friend->sender->name ?></strong>
                                             <div><?= $friend->sender->email?></div>
-                                            
+
                                             <small class="text-muted"></small>
 
                                        <?php endif; ?>
@@ -227,17 +230,15 @@
                             <?php endforeach; ?>
 
 
-                                   
+
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>
             </div>
-            
-            <script>            
- 
 
+            <script>
 
 var url1 = '<?= $this->Url->build([
 "controller" => "Users",
@@ -246,28 +247,27 @@ var url1 = '<?= $this->Url->build([
 ?>';
 
         function message(receiver_id) {
-            var message= prompt("Message to");
-                    
+            var message= prompt("Write your message here");
+
              console.log(message);
 
           message = {
             message: message,
             receiver_id: receiver_id
           }
-          alert(message);
-           
+          alert("Message sent successfully");
+
             $.ajax({
                 type: 'POST',
                 data: message,
                 url: url1,
                 success:function(data) {
-                  alert(data);
-                 $("p").text(data);,
+
+                 $("p").text(data);
                  // window.location.href = url2;
               },
             });
 
-           
         }
 </script>
 <style type="text/css">
@@ -275,5 +275,5 @@ var url1 = '<?= $this->Url->build([
    background-image: url("http://localhost/facetube/img/123.png");
 }
 </style>
+
 </html>
-                            
