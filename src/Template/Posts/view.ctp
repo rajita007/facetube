@@ -1,83 +1,104 @@
-<?php
-/**
- * @var \App\View\AppView $this
- * @var \App\Model\Entity\Post $post
- */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <!-- <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Post'), ['action' => 'edit', $post->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Post'), ['action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Posts'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Post'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Senders'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Sender'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Receivers'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Receiver'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Likes'), ['controller' => 'Likes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Like'), ['controller' => 'Likes', 'action' => 'add']) ?> </li>
-    </ul> -->
-</nav>
-<div class="posts view large-9 medium-8 columns content">
-    <!-- <h3><?= h($post->id) ?></h3>
-    <table class="vertical-table">
+<div >
+  <div class="row">
+
+    <div class="col-lg-6">
+      <?php  foreach ($post as $posts): ?>
         <tr>
-            <th scope="row"><?= __('Sender') ?></th>
-            <td><?= $post->has('sender') ? $this->Html->link($post->sender->name, ['controller' => 'Users', 'action' => 'view', $post->sender->id]) : '' ?></td>
+          <div class="social-feed-box">
+
+            <div class="pull-right social-action dropdown">
+              <button data-toggle="dropdown" class="dropdown-toggle btn-white">
+                <i class="fa fa-angle-down"></i>
+              </button>
+              <ul class="dropdown-menu m-t-xs">
+                <li><a href="#">Config</a></li>
+              </ul>
+            </div>
+            <div class="social-avatar">
+              <div class="media-body">
+                <a href="#">
+                  <td><?= h($posts->sender->name) ?></td>
+                </a>
+                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
+              </div>
+            </div>
+            <div class="social-body">
+              <p>
+
+                <td><?= h($posts->description) ?></td>
+              </p>
+
+              <div class="btn-group">
+                <button class="btn btn-white btn-xs" onclick="like(<?= $posts->id ?>, <?= $posts->receiver_id ?>, <?= count($posts->likes)?>)"><i class="fa fa-thumbs-up"></i> <span id ="<?= 'like'.$posts->id ?>"><?= count($posts->likes)?></span></button>
+                <!-- <button class="btn btn-white btn-xs"><i class="fa fa-comments"></i> Comment</button> -->
+                <!-- <button class="btn btn-white btn-xs"><i class="fa fa-share"></i> Share</button> -->
+              </div>
+            </div>
+
+
+          </div>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Receiver') ?></th>
-            <td><?= $post->has('receiver') ? $this->Html->link($post->receiver->name, ['controller' => 'Users', 'action' => 'view', $post->receiver->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($post->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($post->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($post->modified) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Description') ?></h4>
-        <?= $this->Text->autoParagraph(h($post->description)); ?>
+      <?php endforeach; ?>
     </div>
-    <div class="row">
-        <h4><?= __('Attach') ?></h4>
-        <?= $this->Text->autoParagraph(h($post->attach)); ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Likes') ?></h4>
-        <?php if (!empty($post->likes)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Post Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($post->likes as $likes): ?>
-            <tr>
-                <td><?= h($likes->id) ?></td>
-                <td><?= h($likes->post_id) ?></td>
-                <td><?= h($likes->user_id) ?></td>
-                <td><?= h($likes->created) ?></td>
-                <td><?= h($likes->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Likes', 'action' => 'view', $likes->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Likes', 'action' => 'edit', $likes->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Likes', 'action' => 'delete', $likes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $likes->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?> -->
-    </div>
+
+  </div>
 </div>
+
+<div class="footer">
+  <div class="pull-right">
+    10GB of <strong>250GB</strong> Free.
+  </div>
+  <div>
+    <strong>Copyright</strong> Example Company &copy; 2014-2015
+  </div>
+</div>
+
+</div>
+</div>
+
+
+<script>
+var url8 = '<?= $this->Url->build([
+  "controller" => "Posts",
+  "action" => "like",
+]);
+?>';
+// $(document).ready(function(){
+function like(post_id, user_id, postCount) {
+  data = {
+    user_id:user_id,
+    post_id:post_id
+  };
+  console.log(postCount);
+  console.log('here');
+  console.log(url8);
+  $.ajax({
+    type: 'POST',
+    data: data,
+    url: url8,
+    dataType:"json",
+    // accepts:"application/json",
+    success: function(response) {
+      alert('Success');
+      $("#like"+post_id).html(postCount+1);
+      console.log('here2');
+      console.log(response);
+
+    },
+    error:function(response){
+      alert('Failed');
+      console.log(response);
+    }
+  });
+
+}
+</script>
+<!-- Mainly scripts -->
+<!-- <script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<!-- <script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script> --> -->

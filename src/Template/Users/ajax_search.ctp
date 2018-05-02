@@ -28,7 +28,7 @@
                                             <button type="button" onclick='message(<?= $users->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-sm btn-block"  onclick='add()' id="addF"><i class="fa fa-coffee"></i> Add Friend</button>
+                                            <button type="button" class="btn btn-default btn-sm btn-block"  onclick='add(<?= $users->id ?>)' id="addF"><i class="fa fa-coffee"></i> Add Friend</button>
                                         </div>
                                     </div>
                                 </div>
@@ -70,10 +70,36 @@ var url1 = '<?= $this->Url->build([
             });
 
         }
-           function add(){
-            alert('hi');
-            $("#addF").hide();
-           }
+           var url2 = '<?= $this->Url->build([
+"controller" => "Users",
+"action" => "friend",
+]);
+?>';
+          
+        function add(receiver_id) {
+            
+                    
+             alert(receiver_id);
+
+          var message = {
+          
+            receiver_id: receiver_id
+          }
+          alert(message);
+           
+            $.ajax({
+                type: 'POST',
+                data: message,
+                url: url2,
+                success:function(data) {
+                  alert(data);
+                 $("p").text(data);
+                 // window.location.href = url2;
+              },
+            });
+
+        }
+ 
         
         
 </script>

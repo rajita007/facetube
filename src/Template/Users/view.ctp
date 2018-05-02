@@ -7,7 +7,7 @@
 
                         <div class="gray-bg">
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src="img/profile_big.jpg">
+                                <img alt="image" class="img-responsive" src=<?php echo $user->photo ?>>
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $user['name'] ?> </strong></h4>
@@ -25,7 +25,10 @@
                                             <button type="button" onclick='message(<?= $user->id ?>)' class="btn btn-primary btn-sm btn-block" id = "message"><i class="fa fa-envelope"></i> Send Message</button>
                                         </div>
                                         <div class="col-md-6">
-                                            <?= $this->Html->link(__('View'), ['controller'=>'Posts','action' => 'post', $user->id]) ?>
+                                            <input type="button" class="btn btn-danger btn-sm btn-block" title="Add Post" value="Add Post" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"post",$user->id]); ?>'" >
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="button" class="btn btn-info btn-sm btn-block" title="Add Post" value="View Timeline" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"view",$user->id]); ?>'" >
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +247,7 @@ var url1 = '<?= $this->Url->build([
 ?>';
 
         function message(receiver_id) {
-            var message= prompt("Message to");
+            var message= prompt("Write your message here");
 
              console.log(message);
 
@@ -252,19 +255,18 @@ var url1 = '<?= $this->Url->build([
             message: message,
             receiver_id: receiver_id
           }
-          alert(message);
+          alert("Message sent successfully");
 
             $.ajax({
                 type: 'POST',
                 data: message,
                 url: url1,
                 success:function(data) {
-                  alert(data);
-                 $("p").text(data);,
+
+                 $("p").text(data);
                  // window.location.href = url2;
               },
             });
-
 
         }
 </script>
