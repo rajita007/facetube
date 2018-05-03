@@ -81,16 +81,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
       <div  style="margin:0 12px 0 12px;">
       <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
-          <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
-
-          <div>
-            <div class="result" >
-              <span class="test"><input type="text" placeholder="Search for something..." name="top-search" id="top"></span>
-
-            </div>
-          </div>
-
-</div>
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                      <div class="form-group" >
+                    <div class="result">
+                    <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top"><button onclick="myFunction()"></button>
+                </div></div>
+            
+        </div>
             <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
                 <li class="dropdown">
 
@@ -104,12 +101,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                                 <a href="profile.html" class="pull-left">
                                     <img alt="image" class="img-circle" src=<?php echo $friendRequest->sender->photo ?>>
                                 </a>
-                                <div class="media-body">
-
+                                <div class="media-body">                           
                                     <strong><?=$friendRequest->sender->name ?></strong><br>
                                     <button id="btn_id" onclick="friendR(<?php echo $friendRequest['id'] ?>, 1 )">Accept</button>
                                     <button onclick="friendR(<?php echo $friendRequest['id'] ?>, 0 )">Decline</button>
-
                                 </div>
                             </div>
                         </li>
@@ -117,24 +112,74 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <?php endforeach;?>
                     </ul>
                 </li>
+                
+
                 <li class="dropdown">
                   <div class="text-center link-block">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        <i class="fa fa-bell"></i>  <span class="label label-primary"><?php echo sizeof($notifications) ?></span>
                     </a>
-                  </div>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <div class="text-center link-block">
-                      <a href="notifications.html">
-                        <strong>  <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?></strong>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <?php  foreach($notifications as $notification): ?>
 
-          </nav>
+                        <?php  if(($notification->notificationType_id)==1): ?>
+                        <li> 
+                              <a>
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> <?= $notification->message->sender->name ?> has sent you a message.
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                              </a>
+                            
+                        </li>
+                      
+                    
+                        <li class="divider"></li>
+                        <?php endif;?>
+                        <?php   if(($notification->notificationType_id)==2): ?>
+                        <li>
+                            <a>
+                                <div> 
+                                    <i class="fa fa-twitter fa-fw"></i> <?= $notification->friend->receiver->name ?> has accepted your friend request.
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        
+                        <li class="divider"></li>
+                        <?php endif;?>
+                        <?php  if(($notification->notificationType_id)==3):?>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i><?= $notification->like->user->name ?> 
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                          <?php endif;?>
+                           <?php  if(($notification->notificationType_id)==4):?>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> <?= $notification->post->receiver->name?>
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                          <?php endif;?>
+                          
+                            
+                        
+                   <?php endforeach;?>
+                        
+</ul>
+
+                <li>
+                    <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?>
+                </li>         
+
+        </nav>
         </div>
           <div style="margin:0 0 0 12px;">
             <h4 class="fb logo-namee"> <?php echo $this->Html->link('Facetube','/Users/index', array('class'=>'button'))?></h4>

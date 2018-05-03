@@ -35,9 +35,6 @@ class UsersController extends AppController
         $this->set('user', $user);
         $this->set('messages',$messages);
         $this->set('friends',$friends);
-
-        $notifications=$this->Notifications->findById($userId)->toArray();
-        $this->set('notifications',$notifications);
     }
 
     public function handleRequest($id, $accept) {
@@ -50,7 +47,7 @@ class UsersController extends AppController
         $this->loadModel('Notifications');
         $user=[];
         $new = $this->Notifications->newEntity();
-        $user['user_id']=$this->Auth->user('id');
+        $user['user_id']=$request['receiver_id'];
         $user['notificationType_id']=2;
         $user['object_id']=$id;
         $new = $this->Notifications->patchEntity($new,$user);
@@ -198,13 +195,6 @@ class UsersController extends AppController
 
                  //return $this->redirect(['action' => 'vie']);
             }
-            $this->Flash->error(__('The message could not be saved. Please, try again.'));
-
-
-
-
-
-
 
     }
 

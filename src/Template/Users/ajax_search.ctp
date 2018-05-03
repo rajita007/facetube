@@ -9,7 +9,7 @@
 
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <img class="img-responsive" src=<?php  echo $users['photo'];?>
+                                <?= $this->Html->image('/'.$users['photo'], ['alt' => 'IMAGE']) ?>
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $users['name'] ?> </strong></h4>

@@ -100,13 +100,25 @@ class AppController extends Controller
         $friendRequests=  null;
 
         if($user){
+        $this->loadModel("Notifications");
+        // $typeName=$this->Notifications->find()->toArray();
+            $notifications=$this->Notifications->findByUserId($user['id'])
+                                                ->contain(['Messages.Senders','Friends.Receivers','Likes','Posts.Senders'])
+                                                ->all();
             
+            // 'Messages.Senders','Likes','Friends.Receivers'
+            
+        $this->set('notifications',$notifications);
             $this->loadModel('Friends'); 
             $friendRequests=$this->Friends->find()->where(['receiver_id'=>$user['id'],'Friends.status'=>0])->contain('Senders')->toArray();
 
             $this->set('friendRequests',$friendRequests);
         }
                 
-
+    
+    // pr($userId);die;
+    // $notifications=$this->Notifications->find()->contain(['Users','Messages'])->toArray();
+        // $this->set('notifications',$notifications);
     }
+    
 }

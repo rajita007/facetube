@@ -44,12 +44,15 @@ class MessagesTable extends Table
         $this->belongsTo('Senders', [
             'className' => 'Users',
             'foreignKey' => 'sender_id',
-            'joinType' => 'INNER'
+            'joinType' => 'LEFT'
         ]);
         $this->belongsTo('Receivers', [
             'className' => 'Users',
             'foreignKey' => 'receiver_id',
             'joinType' => 'INNER'
+        ]);
+         $this->hasMany('Notifications', [
+            'foreignKey' => 'object_id'
         ]);
     }
 
@@ -59,6 +62,9 @@ class MessagesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
+    public function findObjectFinder(Query $query, array $options){
+        return $query->where(['notificationType_id'=>1]);
+    }
     public function validationDefault(Validator $validator)
     {
         $validator

@@ -49,6 +49,9 @@ class LikesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Notifications', [
+            'foreignKey' => 'object_id'
+        ]);
     }
 
     /**
@@ -57,6 +60,9 @@ class LikesTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
+    public function findObjectFinder(Query $query, Array $array){
+        return $query->where(['notificationType_id'=>3]);
+    }
     public function validationDefault(Validator $validator)
     {
         $validator
