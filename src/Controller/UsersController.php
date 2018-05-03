@@ -305,7 +305,7 @@ public function friend(){
 
     }
     public function ajaxSearch($searchText){
-      // pr($searchText); die;
+
       $this->viewBuilder()->setLayout('searchResult-default');
       // $post=$this->request->getData();
       //pr($post);die;
