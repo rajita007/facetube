@@ -1,28 +1,30 @@
             <div >
                 <div class="row">
 
-                    <div class="col-lg-6">
+                    <!--<div class="col-lg-6">-->
                       <?php foreach ($data as $post): ?>
-                        <tr>
+                        <div class="col-lg-6">
                         <div class="social-feed-box">
 
                             <div class="pull-right social-action dropdown">
-                                <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                                    <i class="fa fa-angle-down"></i>
+                                <!-- <button data-toggle="dropdown" class="dropdown-toggle bt n-white"> -->
+
+                                  <?=  $this->Form->postButton('<i class="fa fa-minus"></i>', ['controller'=>'Posts','action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?>
+                                    <i ></i>
                                 </button>
-                                <ul class="dropdown-menu m-t-xs">
-                                    <li><a href="#">Config</a></li>
-                                </ul>
                             </div>
                             <div class="social-avatar">
                                 <div class="media-body">
                                     <a href="#">
                                       <td><?php echo $post->sender->name ; ?></td>
                                     </a>
-                                    <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
                                 </div>
                             </div>
                             <div class="social-body">
+                              <p>
+
+                                <td class="img"> <?= $this->Html->image('/'.$post['attach'], ['alt' => 'IMAGE']) ?></td>
+                              </p>
                                 <p>
 
                                   <td><?= h($post->description) ?></td>
@@ -37,24 +39,12 @@
 
 
                         </div>
-                      </tr>
-                        <?php endforeach; ?>
-                    </div>
+                      </div>
 
+                        <?php endforeach; ?>
+                    <!--</div>-->
                 </div>
             </div>
-
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2015
-            </div>
-        </div>
-
-        </div>
-        </div>
 
 
 <script>
@@ -94,6 +84,10 @@ function like(post_id, user_id, postCount) {
 
 
 </script>
+<style>
+img {
+    width: 50%;
+}</style>
     <!-- Mainly scripts -->
     <!-- <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>

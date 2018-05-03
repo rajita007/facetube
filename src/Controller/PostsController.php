@@ -24,10 +24,10 @@ class PostsController extends AppController
 
 
     //$posts = $this->Posts->find()->contain(['Likes'])->all();
-    $data = $this->Posts->find()->contain(['Senders',"Likes"])->toArray();
-    //pr($data); die;
-    //$this->set(compact('posts'));
-    $this->set(compact('data'));
+$data = $this->Posts->find()->contain(['Senders',"Likes"])->toArray();
+//pr($data); die;
+//$this->set(compact('posts'));
+$this->set(compact('data'));
 
 
   }
@@ -80,15 +80,21 @@ class PostsController extends AppController
 
     }
   }
-  public function post($id = null)
-  {
+    public function post($id = null)
+    {
       $this->loadModel('Notifications');
-    if($id){
-      $this->set('receiver_id',$id);
-    }
-    $data=$this->request->getData();
+        if($id){
+            $this->set('receiver_id',$id);
+        }
+        $data=$this->request->getData();
+      //  $post = $this->Posts->newEntity();
+        if ($this->request->is('post')) {
 
-    if ($this->request->is('post')) {
+          //
+          //   $post['sender_id']=$this->Auth->user('id');
+          //   $post['receiver_id']=$id;
+          //
+          // //  $post= $this->Posts->patchEntity($post,$this->request->getData());
 
 
 
@@ -113,17 +119,16 @@ class PostsController extends AppController
         $post['sender_id']=$this->Auth->user('id');
         $post['receiver_id']=$id;
         $post['active'] = 1;
-
         if($this->Posts->save($post)) {
           $user=[];
        $new = $this->Notifications->newEntity();
+
        $user['user_id']=$post['receiver_id'];
        $user['notificationType_id']=3;
        $user['object_id']=$post->id;
        $new = $this->Notifications->patchEntity($new,$user);
-       pr($new); die;
-       if(!$this->Notifications->save($new)){
 
+       if(!$this->Notifications->save($new)){
          throw new Exception("Error Processing Request");
        }
           return $this->redirect(['controller'=>'Users','action'=>'index']);
@@ -180,7 +185,7 @@ class PostsController extends AppController
     }
     public function like(){
       $this->loadModel('Likes');
-
+        $this->loadModel('Notifications');
       $like = $this->Likes->newEntity();
       if ($this->request->is('post')) {
         $like= $this->Likes->patchEntity($like,$this->request->getData());
@@ -189,6 +194,18 @@ class PostsController extends AppController
 
         // pr($post); die;
         if ($this->Likes->save($like)) {
+          $user=[];
+       $new = $this->Notifications->newEntity();
+
+       $user['user_id']=$like['user_id'];
+       $user['notificationType_id']=3;
+       $user['object_id']=$like->id;
+       $new = $this->Notifications->patchEntity($new,$user);
+
+       if(!$this->Notifications->save($new)){
+         //pr($new); die;
+         throw new Exception("Error Processing Request");
+       }
 
         }
         $data['post_id']=$like['post_id'];

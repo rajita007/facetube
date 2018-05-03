@@ -41,8 +41,8 @@ class AppController extends Controller
     {
         parent::initialize();
         $this->loadComponent('RequestHandler', [
-            'enableBeforeRedirect' => false,
-        ]);
+    'enableBeforeRedirect' => false,
+]);
 
 
         $this->loadComponent('Flash');
@@ -94,12 +94,18 @@ class AppController extends Controller
         
 
     }
-    public function beforeRender(Event $event)
-    {   $friendRequests=  null;
-        $this->loadModel('Friends'); 
-                $friendRequests=$this->Friends->find()->where(['receiver_id'=>$this->Auth->user('id'),'Friends.status'=>0])->contain('Senders')->toArray();
+    public function beforeFilter(Event $event)
+    {   
+        $user = $this->Auth->user();
+        $friendRequests=  null;
 
-                $this->set('friendRequests',$friendRequests);
+        if($user){
+            
+            $this->loadModel('Friends'); 
+            $friendRequests=$this->Friends->find()->where(['receiver_id'=>$user['id'],'Friends.status'=>0])->contain('Senders')->toArray();
+
+            $this->set('friendRequests',$friendRequests);
+        }
                 
 
     }

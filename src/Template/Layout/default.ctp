@@ -77,109 +77,67 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body class="gray-bg">
   <div>
     <?= $this->Flash->render() ?>
-      <div class="row">
-        <div  style="margin:0 12px 0 12px;">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-          <div class="navbar-header">
-            <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
+    <div class="row">
+      <div  style="margin:0 12px 0 12px;">
+      <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+          <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
 
-            <div>
-              <div class="result" >
-                <span class="test"><input type="text" placeholder="Search for something..." name="top-search" id="top"></span>
-                <span ><button class="btn btn-primary fa fa-search" onclick="myFunction()">Search</button></span>
-              </div>
-            </div>
+          <div>
+            <div class="result" >
+              <span class="test"><input type="text" placeholder="Search for something..." name="top-search" id="top"></span>
+                <button class="btn btn-primary fa fa-search" onclick="myFunction()">Search</button>
 
             </div>
+          </div>
+
+</div>
             <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
-
-
-
-              <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                  <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                </a>
-                <ul class="dropdown-menu dropdown-messages">
-                  <?php foreach($friendRequests as $friendRequest):?>
-                    <li>
-                      <div class="dropdown-messages-box">
-                        <a href="profile.html" class="pull-left">
-                          <img alt="image" class="img-circle" src=<?php echo $friendRequest->sender->photo ?>>
-                        </a>
-                        <div class="media-body">
-
-                          <strong><?=$friendRequest->sender->name ?></strong><br>
-                          <button>Accept</button>
-                          <button>Decline</button>
-
-                        </div>
-                      </div>
-                    </li>
-                    <li class="divider"></li>
-                  <?php endforeach;?>
-
-                  <li>
-                    <div class="text-center link-block">
-                      <a href="mailbox.html">
-                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
-              </li>
-              <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                  <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                  <li>
-                    <a href="mailbox.html">
-                      <div>
-                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                      </div>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user-plus"></i>  <span class="label label-warning"><?php echo sizeof($friendRequests) ?></span>
                     </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a href="profile.html">
-                      <div>
-                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                        <span class="pull-right text-muted small">12 minutes ago</span>
-                      </div>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <?php foreach($friendRequests as $friendRequest):?>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src=<?php echo $friendRequest->sender->photo ?>>
+                                </a>
+                                <div class="media-body">
+
+                                    <strong><?=$friendRequest->sender->name ?></strong><br>
+                                    <button id="btn_id" onclick="friendR(<?php echo $friendRequest['id'] ?>, 1 )">Accept</button>
+                                    <button onclick="friendR(<?php echo $friendRequest['id'] ?>, 0 )">Decline</button>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                    <?php endforeach;?>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                  <div class="text-center link-block">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
                     </a>
-                  </li>
-                  <li class="divider"></li>
-                  <li>
-                    <a href="grid_options.html">
-                      <div>
-                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                        <span class="pull-right text-muted small">4 minutes ago</span>
-                      </div>
-                    </a>
+                  </div>
                   </li>
                   <li class="divider"></li>
                   <li>
                     <div class="text-center link-block">
                       <a href="notifications.html">
-                        <strong>See All Alerts</strong>
-                        <i class="fa fa-angle-right"></i>
+                        <strong>  <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?></strong>
                       </a>
                     </div>
                   </li>
                 </ul>
-              </li>
-
-
-              <li>
-                <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?>
-              </li>
-            </ul>
 
           </nav>
         </div>
           <div style="margin:0 0 0 12px;">
-            <h2 class="fb">FaceTube</h2>
+            <h4 class="fb logo-namee"> <?php echo $this->Html->link('Facetube','/Users/index', array('class'=>'button'))?></h4>
           </div>
           <!-- top nav end -->
           <div class="wrapper wrapper-content">
@@ -206,35 +164,70 @@ var url = '<?= $this->Url->build([
 ]);
 ?>';
 
-function myFunction() {
-  // data = {
-  //   description: $('#top').val()
-  // }
+        function myFunction() {
+          // data = {
+          //   description: $('#top').val()
+          // }
 
 
-  //   $.ajax({
-  //       type: 'POST',
-  //       data: data,
-  //       beforeSend: function(){
-  //       $("#result").text("loading...");
-  //     },
-  //       url: url,
-  //       success:function(data) {
-  //         alert(data);
-  //        $("#result").text(data);
-  //     },
-  //   });
+          //   $.ajax({
+          //       type: 'POST',
+          //       data: data,
+          //       beforeSend: function(){
+          //       $("#result").text("loading...");
+          //     },
+          //       url: url,
+          //       success:function(data) {
+          //         alert(data);
+          //        $("#result").text(data);
+          //     },
+          //   });
 
-  var searchText = $('#top').val();
-  url = url+'/'+searchText;
-  window.location.href = url;
-}
+          var searchText = $('#top').val();
+          url = url+'/'+searchText;
+          window.location.href = url;
+        }
+
+          var url3 = '<?= $this->Url->build([
+            "controller" => "Users",
+            "action" => "handleRequest",
+            ]);
+            ?>';
+        function friendR(sender_id, status) {
+
+          url3 = url3+'/'+sender_id+'/'+status;
+
+          $.ajax({
+                type: 'GET',
+                url: url3,
+                headers: { 'Accept': 'application/json', 'content-type': 'application/json' },
+                beforeSend: function(){
+                  $("#result").text("loading...");
+                },
+                success:function() {
+                  if(status){
+                    alert('Friend Request Sent');
+                  }else{
+                    alert('Friend Request Declined');
+                  }
+                 location.reload();
+              },
+            });
+
+        }
 </script>
 <style type="text/css">
 .gray-bg {
   background-image: url("http://localhost/facetube/img/9.jpg"); no-repeat;
   background-size: cover;
 
+}
+.logo-namee {
+  color: black;
+  font-size: 100px;
+  font-weight: 800;
+  letter-spacing: -10px;
+  margin-bottom: 0;
 }
 </style>
 </html>
