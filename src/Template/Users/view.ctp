@@ -7,7 +7,7 @@
 
                         <div class="gray-bg">
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src=<?php echo $user->photo ?>>
+                                <?= $this->Html->image('/'.$user['photo'], ['alt' => 'IMAGE']) ?>
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $user['name'] ?> </strong></h4>
@@ -16,7 +16,7 @@
                                     About me
                                 </h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitat.
+                                    <?php echo $user['email']; ?>
                                 </p>
 
                                 <div class="user-button">
@@ -255,15 +255,28 @@ var url1 = '<?= $this->Url->build([
             message: message,
             receiver_id: receiver_id
           }
-          alert("Message sent successfully");
 
             $.ajax({
                 type: 'POST',
                 data: message,
                 url: url1,
-                success:function(data) {
-
+                success:function(data) {           
+                 alert("Message sent successfully");
                  $("p").text(data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
                  // window.location.href = url2;
               },
             });

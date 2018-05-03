@@ -50,10 +50,53 @@ class NotificationsTable extends Table
             'foreignKey' => 'notificationType_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Objects', [
+        $this->belongsTo('Messages', [
+            
             'foreignKey' => 'object_id',
-            'joinType' => 'INNER'
+            // 'joinType' => 'INNER',
+            'finder'=>'objectfinder'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 1
+
+            // ]
         ]);
+        
+
+        $this->belongsTo('Friends', [
+            
+            'foreignKey' => 'object_id',
+            // 'joinType' => 'INNER',
+            'finder'=>'objectFinder'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 2
+
+            // ]
+        ]);
+        $this->belongsTo('Likes', [
+            
+            'foreignKey' => 'object_id',
+            // 'joinType' => 'INNER',
+            'finder'=>'objectFinder'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 2
+
+            // ]
+        ]);
+        $this->belongsTo('Posts', [
+            
+            'foreignKey' => 'object_id',
+            // 'joinType' => 'INNER',
+            'finder'=>'objectFinder'
+            // 'conditions'=>[
+            //     'Notifications.notificationType_id' => 2
+
+            // ]
+        ]);
+
+        // $this->belongsTo('Objects', [
+        //     'foreignKey' => 'object_id',
+        //     'joinType' => 'INNER'
+        // ]);
     }
 
     /**
@@ -62,6 +105,7 @@ class NotificationsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
+    
     public function validationDefault(Validator $validator)
     {
         $validator
@@ -82,7 +126,7 @@ class NotificationsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         $rules->add($rules->existsIn(['notificationType_id'], 'NotificationTypes'));
-        $rules->add($rules->existsIn(['object_id'], 'Objects'));
+        // $rules->add($rules->existsIn(['object_id'], 'Objects'));
 
         return $rules;
     }

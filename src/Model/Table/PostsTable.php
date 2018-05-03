@@ -55,6 +55,9 @@ class PostsTable extends Table
         $this->hasMany('Likes', [
             'foreignKey' => 'post_id'
         ]);
+        $this->hasMany('Notifications', [
+            'foreignKey' => 'object_id'
+        ]);
     }
 
     /**
@@ -63,6 +66,9 @@ class PostsTable extends Table
      * @param \Cake\Validation\Validator $validator Validator instance.
      * @return \Cake\Validation\Validator
      */
+    public function findObjectFinder(Query $query, Array $array){
+        return $query->where(['notificationType_id'=>4]);
+    }
     public function validationDefault(Validator $validator)
     {
         $validator
