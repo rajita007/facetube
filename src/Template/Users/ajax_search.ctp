@@ -13,15 +13,11 @@
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong><?php echo $users['name'] ?> </strong></h4>
-                                <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
-                                <h5>
-                                    About me
-                                </h5>
                                 <p>
                                     <?php echo $users['email'] ?>
                                 </p>
-                              
-                                
+
+
                                 <div id="dem" class="user-button">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -39,17 +35,17 @@
                     </div>
                   </div>
                   <?php endforeach;?>
-                  <?php endif;?> 
- <script> 
+                  <?php endif;?>
+ <script>
 var url1 = '<?= $this->Url->build([
 "controller" => "Users",
 "action" => "message",
 ]);
 ?>';
-          
+
         function message(receiver_id) {
             var message= prompt("Write your message here");
-                    
+
              console.log(message);
 
           message = {
@@ -57,13 +53,13 @@ var url1 = '<?= $this->Url->build([
             receiver_id: receiver_id
           }
           alert("Message sent successfully");
-           
+
             $.ajax({
                 type: 'POST',
                 data: message,
                 url: url1,
                 success:function(data) {
-                  
+
                  // window.location.href = url2;
               },
             });
@@ -74,15 +70,15 @@ var url1 = '<?= $this->Url->build([
 "action" => "friend",
 ]);
 ?>';
-          
+
         function add(receiver_id) {
-        
+
           var message = {
-          
+
             receiver_id: receiver_id
           }
           alert("Friend Request Sent Successfully!!");
-           
+
             $.ajax({
                 type: 'POST',
                 data: message,
@@ -94,24 +90,24 @@ var url1 = '<?= $this->Url->build([
             });
 
         }
- 
+
  var url3 = '<?= $this->Url->build([
 "controller" => "Users",
 "action" => "index",
 ]);
 ?>';
-          
+
 //     $("#addF").click(function(){
 //     this.hide();
-// });    
-        
+// });
+
 </script>
-<style type="text/css">
+<!-- <style type="text/css">
 .gray-bg {
    background-image: url("http://localhost/facetube/img/123.png");
 }
 .addfriend{}
-</style>
+</style> -->
 
 
 </html>

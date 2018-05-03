@@ -7,10 +7,10 @@
                         <div class="social-feed-box">
 
                             <div class="pull-right social-action dropdown">
-                                <button data-toggle="dropdown" class="dropdown-toggle bt n-white">
+                                <!-- <button data-toggle="dropdown" class="dropdown-toggle bt n-white"> -->
 
-                                  <?=  $this->Form->postLink(__('Delete'), ['controller'=>'Posts','action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?>
-                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                  <?=  $this->Form->postButton('<i class="fa fa-minus"></i>', ['controller'=>'Posts','action' => 'delete', $post->id], ['confirm' => __('Are you sure you want to delete # {0}?', $post->id)]) ?>
+                                    <i ></i>
                                 </button>
                             </div>
                             <div class="social-avatar">

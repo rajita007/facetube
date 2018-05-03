@@ -86,14 +86,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
           <div>
             <div class="result" >
               <span class="test"><input type="text" placeholder="Search for something..." name="top-search" id="top"></span>
-              <span ><button class="btn btn-primary fa fa-search" onclick="myFunction()">Search</button></span>
+                <button class="btn btn-primary fa fa-search" onclick="myFunction()">Search</button>
+
             </div>
           </div>
 
 </div>
             <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
-
-
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-user-plus"></i>  <span class="label label-warning"><?php echo sizeof($friendRequests) ?></span>
@@ -201,6 +200,7 @@ var url = '<?= $this->Url->build([
           $.ajax({
                 type: 'GET',
                 url: url3,
+                headers: { 'Accept': 'application/json', 'content-type': 'application/json' },
                 beforeSend: function(){
                   $("#result").text("loading...");
                 },
