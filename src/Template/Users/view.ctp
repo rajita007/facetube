@@ -254,7 +254,7 @@ var url1 = '<?= $this->Url->build([
             message: message,
             receiver_id: receiver_id
           }
-          alert("Message sent successfully");
+          
            
             $.ajax({
                 type: 'POST',
@@ -262,7 +262,22 @@ var url1 = '<?= $this->Url->build([
                 url: url1,
                 success:function(data) {
                   
+                 alert("Message sent successfully");
                  $("p").text(data);
+
+
+
+
+
+
+
+
+
+
+
+
+
+                 
                  // window.location.href = url2;
               },
             });

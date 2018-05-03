@@ -95,18 +95,19 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                         <i class="fa fa-bell"></i>  <span class="label label-primary"><?php echo sizeof($notifications) ?></span>
-                    
+                    </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <?php  foreach($notifications as $notification): ?>
 
                         <?php  if(($notification->notificationType_id)==1): ?>
                         <li> 
-                            
+                              <a>
                                 <div>
-                                    <i class="fa fa-envelope fa-fw"></i> 
+                                    <i class="fa fa-envelope fa-fw"></i> <?= $notification->message->sender->name ?> has sent you a message.
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
-                            </a>
+                              </a>
+                            
                         </li>
                       
                     
@@ -114,9 +115,9 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         <?php endif;?>
                         <?php   if(($notification->notificationType_id)==2): ?>
                         <li>
-                            <a href="profile.html">
+                            <a>
                                 <div> 
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <i class="fa fa-twitter fa-fw"></i> <?= $notification->friend->receiver->name ?> has accepted your friend request.
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
                             </a>
@@ -128,7 +129,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         <li>
                             <a href="grid_options.html">
                                 <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <i class="fa fa-upload fa-fw"></i><?= $notification->like->user->name ?> 
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
@@ -138,30 +139,23 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         <li>
                             <a href="grid_options.html">
                                 <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <i class="fa fa-upload fa-fw"></i> <?= $notification->post->receiver->name?>
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
                         </li>
                           <?php endif;?>
-                          <?php  if(($notification->notificationType_id)==4):?>
-                        <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                          <?php endif;?>
-                    <?php endforeach;?>
+                          
+                            
                         
-
+                   <?php endforeach;?>
+                        
+</ul>
 
                 <li>
                     <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?>
                 </li>
-            </ul>
+            
 
         </nav>
         </div>

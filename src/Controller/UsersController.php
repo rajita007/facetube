@@ -50,7 +50,7 @@ class UsersController extends AppController
         $this->loadModel('Notifications');
         $user=[];
         $new = $this->Notifications->newEntity();
-        $user['user_id']=$this->Auth->user('id');
+        $user['user_id']=$request['receiver_id'];
         $user['notificationType_id']=2;
         $user['object_id']=$id;
         $new = $this->Notifications->patchEntity($new,$user);

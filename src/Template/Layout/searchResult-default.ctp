@@ -60,111 +60,102 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 </div></div>
             
         </div>
-            <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
+            
+                <ul class="nav navbar-top-links navbar-right" style="display: inline-flex;">
 
-
+                
 
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                        <i class="fa fa-user-plus"></i>  <span class="label label-warning"><?php echo sizeof($friendRequests) ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-messages">
+                        <?php foreach($friendRequests as $friendRequest):?>
                         <li>
                             <div class="dropdown-messages-box">
                                 <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                    <img alt="image" class="img-circle" src=<?php echo $friendRequest->sender->photo ?>>
                                 </a>
                                 <div class="media-body">
-                                    <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                    
+                                    <strong><?=$friendRequest->sender->name ?></strong><br>
+                                    <button id="btn_id" onclick="friendR(<?php echo $friendRequest['id'] ?>, 1 )">Accept</button>
+                                    <button onclick="friendR(<?php echo $friendRequest['id'] ?>, 0 )">Decline</button>
+                                    
                                 </div>
                             </div>
                         </li>
                         <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/a4.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="img/profile.jpg">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                </a>
-                            </div>
-                        </li>
+                    <?php endforeach;?>
+                        
+                       
                     </ul>
                 </li>
+                
+
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                        <i class="fa fa-bell"></i>  <span class="label label-primary"><?php echo sizeof($notifications) ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
+                        <?php  foreach($notifications as $notification): ?>
+
+                        <?php  if(($notification->notificationType_id)==1): ?>
+                        <li> 
+                              <a>
                                 <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                    <i class="fa fa-envelope fa-fw"></i> <?= $notification->message->sender->name ?> has sent you a message.
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
-                            </a>
+                              </a>
+                            
                         </li>
+                      
+                    
                         <li class="divider"></li>
+                        <?php endif;?>
+                        <?php   if(($notification->notificationType_id)==2): ?>
                         <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                            <a>
+                                <div> 
+                                    <i class="fa fa-twitter fa-fw"></i> <?= $notification->friend->receiver->name ?> has accepted your friend request.
                                     <span class="pull-right text-muted small">12 minutes ago</span>
                                 </div>
                             </a>
                         </li>
+                        
                         <li class="divider"></li>
+                        <?php endif;?>
+                        <?php  if(($notification->notificationType_id)==3):?>
                         <li>
                             <a href="grid_options.html">
                                 <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <i class="fa fa-upload fa-fw"></i><?= $notification->like->user->name ?> 
                                     <span class="pull-right text-muted small">4 minutes ago</span>
                                 </div>
                             </a>
                         </li>
-                        <li class="divider"></li>
+                          <?php endif;?>
+                           <?php  if(($notification->notificationType_id)==4):?>
                         <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> <?= $notification->post->receiver->name?>
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
                         </li>
-                    </ul>
-                </li>
-
+                          <?php endif;?>
+                          
+                            
+                        
+                   <?php endforeach;?>
+                        
+</ul>
 
                 <li>
                     <?php echo $this->Html->link('Logout','/Users/logout', array('class'=>'button'))?>
-                </li>
-            </ul>
+                </li>         
 
         </nav>
         </div>
