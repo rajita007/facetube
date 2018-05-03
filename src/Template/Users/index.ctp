@@ -27,7 +27,7 @@
               <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
             </div> -->
             <div class="col-md-6">
-              <input type="button" class="btn btn-w-m btn-danger btn-sm btn-block" title="Click to Deactivate" value="View Timeline" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"index"]); ?>'" >
+              <input type="button" class="btn btn-w-m btn-danger btn-sm btn-block" title="Click to Deactivate" value="View Timeline" onClick="javascipt:window.location.href='<?php echo $this->Url->build(["controller"=>"Posts","action"=>"index",$user->id]); ?>'" >
             </div>
           </div>
         </div>

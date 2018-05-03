@@ -19,15 +19,14 @@ class PostsController extends AppController
   *
   * @return \Cake\Http\Response|void
   */
-  public function index()
+  public function index($id = null)
   {
 
 
     //$posts = $this->Posts->find()->contain(['Likes'])->all();
-$data = $this->Posts->find()->contain(['Senders',"Likes"])->toArray();
-//pr($data); die;
-//$this->set(compact('posts'));
-$this->set(compact('data'));
+    $post=$this->Posts->find()->where(['receiver_id'=>$id])->contain(['Senders','Likes'])->toArray();
+    //pr($post); die;
+    $this->set('post', $post);
 
 
   }
@@ -41,6 +40,7 @@ $this->set(compact('data'));
   */
   public function view($id = null)
   {
+
     //$post = $this->Posts->find()->contain(['Likes'])->all();
     $post=$this->Posts->find()->where(['receiver_id'=>$id])->contain(['Senders','Likes'])->toArray();
     //pr($post); die;
@@ -131,7 +131,11 @@ $this->set(compact('data'));
        if(!$this->Notifications->save($new)){
          throw new Exception("Error Processing Request");
        }
-          return $this->redirect(['controller'=>'Users','action'=>'index']);
+       if($post['sender_id']!==$post['receiver_id']){
+            return $this->redirect(['controller'=>'Posts','action'=>'index'],$post['receiver_id']);}
+        }
+        else{
+            return $this->redirect(['controller'=>'Posts','action'=>'index']);
         }
       }
 

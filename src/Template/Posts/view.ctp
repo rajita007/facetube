@@ -1,25 +1,17 @@
-<div >
-  <div class="row">
+  <div  class="row">
 
-    <div class="col-lg-6">
+    <!-- <div class="col-lg-6"> -->
       <?php  foreach ($post as $posts): ?>
-        <tr>
-          <div class="social-feed-box">
+          <div style="margin:0 13px 0 13px;" class="social-feed-box">
 
-            <div class="pull-right social-action dropdown">
-              <button data-toggle="dropdown" class="dropdown-toggle btn-white">
-                <i class="fa fa-angle-down"></i>
-              </button>
-              <ul class="dropdown-menu m-t-xs">
-                <li><a href="#">Config</a></li>
-              </ul>
+            <div  class="pull-right social-action dropdown">
+              <?=  $this->Form->postButton('<i class="fa fa-minus"></i>', ['controller'=>'Posts','action' => 'delete', $posts->id], ['confirm' => __('Are you sure you want to delete # {0}?', $posts->id)]) ?>
             </div>
             <div class="social-avatar">
               <div class="media-body">
                 <a href="#">
                   <td><?= h($posts->sender->name) ?></td>
                 </a>
-                <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
               </div>
             </div>
             <div class="social-body">
@@ -37,12 +29,10 @@
 
 
           </div>
-        </tr>
       <?php endforeach; ?>
-    </div>
+    <!-- </div> -->
 
   </div>
-</div>
 
 <div class="footer">
   <div class="pull-right">
